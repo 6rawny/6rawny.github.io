@@ -1,1322 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Adeyemo Jamiu Adewale | Data & Finance Intelligence</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-<style>
-  :root {
-    --navy: #0a0f1e;
-    --navy-mid: #111827;
-    --navy-light: #1c2a40;
-    --gold: #c9a84c;
-    --gold-light: #e8c97a;
-    --gold-pale: #f5e8c0;
-    --teal: #1a8fa0;
-    --teal-light: #2ab8cc;
-    --white: #f4f6fa;
-    --white-dim: #b8c0d0;
-    --white-muted: #6b7a96;
-    --red-accent: #c94c4c;
-    --green-accent: #4cae7a;
-    --border: rgba(201,168,76,0.18);
-    --border-subtle: rgba(255,255,255,0.06);
-    --font-display: 'Cormorant Garamond', Georgia, serif;
-    --font-body: 'Outfit', sans-serif;
-    --font-mono: 'DM Mono', monospace;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: var(--font-body);
-    font-weight: 300;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* CUSTOM CURSOR */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--gold);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9999;
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(201,168,76,0.5);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9998;
-    transition: all 0.18s ease;
-  }
-  .cursor-ring.hover { transform: scale(1.8); border-color: var(--gold); }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--navy); }
-  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 60px;
-    background: linear-gradient(to bottom, rgba(10,15,30,0.98) 0%, transparent 100%);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border-subtle);
-    transition: all 0.3s ease;
-  }
-  nav.scrolled { background: rgba(10,15,30,0.98); padding: 14px 60px; }
-
-  .nav-logo {
-    font-family: var(--font-display);
-    font-size: 1.4rem; font-weight: 600;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    text-decoration: none;
-  }
-  .nav-logo span { color: var(--gold); }
-
-  .nav-links { display: flex; gap: 36px; list-style: none; }
-  .nav-links a {
-    font-family: var(--font-mono); font-size: 0.72rem;
-    text-transform: uppercase; letter-spacing: 0.12em;
-    color: var(--white-dim); text-decoration: none;
-    position: relative; transition: color 0.2s;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -4px; left: 0;
-    width: 0; height: 1px; background: var(--gold);
-    transition: width 0.3s ease;
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-links a:hover::after { width: 100%; }
-
-  .nav-cta {
-    font-family: var(--font-mono); font-size: 0.72rem;
-    text-transform: uppercase; letter-spacing: 0.12em;
-    color: var(--gold); text-decoration: none;
-    border: 1px solid var(--gold);
-    padding: 8px 20px; transition: all 0.3s ease;
-  }
-  .nav-cta:hover { background: var(--gold); color: var(--navy); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 120px 60px 80px;
-    position: relative; overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(26,143,160,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 60%),
-      linear-gradient(135deg, #0a0f1e 0%, #0d1528 50%, #0a1520 100%);
-  }
-
-  .hero-grid-overlay {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-
-  .hero-content { position: relative; z-index: 2; }
-
-  .hero-eyebrow {
-    font-family: var(--font-mono); font-size: 0.72rem;
-    text-transform: uppercase; letter-spacing: 0.2em;
-    color: var(--teal-light);
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 28px;
-    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
-  }
-  .hero-eyebrow::before {
-    content: ''; display: block; width: 32px; height: 1px;
-    background: var(--teal-light);
-  }
-
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(3.2rem, 5vw, 5.5rem);
-    font-weight: 600; line-height: 1.0;
-    letter-spacing: -0.01em;
-    color: var(--white);
-    margin-bottom: 8px;
-    opacity: 0; animation: fadeUp 0.8s 0.35s forwards;
-  }
-  .hero-title em {
-    font-style: italic; color: var(--gold);
-    display: block;
-  }
-
-  .hero-sub {
-    font-family: var(--font-display);
-    font-size: clamp(1rem, 1.6vw, 1.3rem);
-    font-weight: 300; font-style: italic;
-    color: var(--white-dim); letter-spacing: 0.03em;
-    margin-bottom: 36px;
-    opacity: 0; animation: fadeUp 0.8s 0.5s forwards;
-  }
-
-  .hero-desc {
-    font-size: 0.95rem; line-height: 1.8;
-    color: var(--white-muted); max-width: 460px;
-    margin-bottom: 48px;
-    opacity: 0; animation: fadeUp 0.8s 0.65s forwards;
-  }
-
-  .hero-actions {
-    display: flex; gap: 16px; flex-wrap: wrap;
-    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
-  }
-  .btn-primary {
-    background: var(--gold); color: var(--navy);
-    font-family: var(--font-mono); font-size: 0.75rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    padding: 14px 32px; text-decoration: none;
-    font-weight: 500; transition: all 0.3s ease;
-    position: relative; overflow: hidden;
-  }
-  .btn-primary::before {
-    content: ''; position: absolute; inset: 0;
-    background: var(--gold-light); transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  .btn-primary:hover::before { transform: translateX(0); }
-  .btn-primary span { position: relative; z-index: 1; }
-
-  .btn-outline {
-    border: 1px solid var(--border);
-    color: var(--white-dim);
-    font-family: var(--font-mono); font-size: 0.75rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    padding: 14px 32px; text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
-
-  /* HERO RIGHT - STATS PANEL */
-  .hero-right {
-    position: relative; z-index: 2;
-    display: flex; flex-direction: column; gap: 16px;
-    align-items: flex-end;
-    opacity: 0; animation: fadeLeft 0.8s 0.6s forwards;
-  }
-
-  .stats-card {
-    background: rgba(28,42,64,0.7);
-    border: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    padding: 24px 32px;
-    width: 320px;
-    position: relative;
-    transition: transform 0.3s ease, border-color 0.3s;
-  }
-  .stats-card:hover { transform: translateY(-2px); border-color: var(--gold); }
-  .stats-card::before {
-    content: ''; position: absolute; top: 0; left: 0;
-    width: 3px; height: 100%; background: var(--gold);
-  }
-  .stats-card-label {
-    font-family: var(--font-mono); font-size: 0.65rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    color: var(--white-muted); margin-bottom: 8px;
-  }
-  .stats-card-value {
-    font-family: var(--font-display); font-size: 2.4rem;
-    font-weight: 600; color: var(--white);
-    line-height: 1;
-  }
-  .stats-card-value span { color: var(--gold); }
-  .stats-card-sub {
-    font-size: 0.78rem; color: var(--white-muted); margin-top: 6px;
-  }
-  .delta { color: var(--green-accent); font-family: var(--font-mono); font-size: 0.72rem; }
-  .delta.neg { color: var(--red-accent); }
-
-  .ticker-row {
-    display: flex; gap: 8px; align-items: center;
-    background: rgba(201,168,76,0.06);
-    border: 1px solid var(--border);
-    padding: 12px 20px; width: 320px;
-    overflow: hidden;
-  }
-  .ticker-item {
-    font-family: var(--font-mono); font-size: 0.68rem;
-    white-space: nowrap; color: var(--white-dim);
-    animation: ticker 20s linear infinite;
-  }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* SECTION COMMONS */
-  section { padding: 120px 60px; position: relative; }
-  .section-label {
-    font-family: var(--font-mono); font-size: 0.68rem;
-    text-transform: uppercase; letter-spacing: 0.2em;
-    color: var(--gold); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 12px;
-  }
-  .section-label::before {
-    content: '//'; color: var(--white-muted);
-  }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 4vw, 3.8rem);
-    font-weight: 600; line-height: 1.1;
-    color: var(--white); margin-bottom: 16px;
-  }
-  .section-title em { font-style: italic; color: var(--gold); }
-  .section-desc {
-    font-size: 0.95rem; line-height: 1.8;
-    color: var(--white-muted); max-width: 520px;
-    margin-bottom: 64px;
-  }
-
-  /* ABOUT */
-  #about { background: var(--navy-mid); }
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1.4fr;
-    gap: 80px; align-items: start;
-  }
-  .about-photo-wrap {
-    position: relative; aspect-ratio: 4/5;
-    background: var(--navy-light);
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .about-photo-wrap img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(20%);
-    transition: filter 0.4s, transform 0.4s;
-  }
-  .about-photo-wrap:hover img { filter: grayscale(0%); transform: scale(1.03); }
-  .about-photo-overlay {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(transparent, rgba(10,15,30,0.85));
-    padding: 40px 24px 24px;
-  }
-  .photo-name {
-    font-family: var(--font-display); font-size: 1.4rem;
-    font-weight: 600; color: var(--white);
-  }
-  .photo-title {
-    font-family: var(--font-mono); font-size: 0.68rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    color: var(--gold);
-  }
-
-  .about-placeholder {
-    width: 100%; aspect-ratio: 4/5;
-    background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
-    border: 1px solid var(--border);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 16px;
-    position: relative; overflow: hidden;
-  }
-  .about-placeholder::before {
-    content: 'AJA';
-    font-family: var(--font-display);
-    font-size: 7rem; font-weight: 700;
-    color: rgba(201,168,76,0.08);
-    position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .about-placeholder-inner {
-    position: relative; text-align: center;
-  }
-  .initials-badge {
-    width: 100px; height: 100px;
-    border: 2px solid var(--gold);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 16px;
-    font-family: var(--font-display); font-size: 2rem;
-    font-weight: 700; color: var(--gold);
-  }
-
-  .about-content {}
-  .about-text {
-    font-size: 1.05rem; line-height: 1.9;
-    color: var(--white-dim); margin-bottom: 40px;
-  }
-  .about-text strong { color: var(--white); font-weight: 500; }
-
-  .expertise-list { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
-  .expertise-tag {
-    font-family: var(--font-mono); font-size: 0.68rem;
-    text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--gold); border: 1px solid var(--border);
-    padding: 6px 14px; background: rgba(201,168,76,0.04);
-    transition: all 0.2s;
-  }
-  .expertise-tag:hover { background: rgba(201,168,76,0.12); border-color: var(--gold); }
-
-  .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .cert-item {
-    display: flex; align-items: flex-start; gap: 10px;
-    padding: 14px 16px;
-    background: rgba(10,15,30,0.6);
-    border: 1px solid var(--border-subtle);
-    border-left: 2px solid var(--teal);
-    font-size: 0.82rem; color: var(--white-dim);
-    transition: border-left-color 0.2s;
-  }
-  .cert-item:hover { border-left-color: var(--gold); color: var(--white); }
-  .cert-item span { color: var(--teal); font-family: var(--font-mono); font-size: 0.7rem; }
-
-  /* EXPERIENCE */
-  #experience { background: var(--navy); }
-  .timeline { position: relative; padding-left: 32px; }
-  .timeline::before {
-    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
-    width: 1px; background: linear-gradient(to bottom, var(--gold), transparent);
-  }
-  .timeline-item {
-    position: relative; margin-bottom: 64px; opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
-  }
-  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
-  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
-  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
-
-  .timeline-dot {
-    position: absolute; left: -36px; top: 6px;
-    width: 10px; height: 10px;
-    background: var(--gold); border-radius: 50%;
-    border: 2px solid var(--navy);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.2);
-  }
-  .timeline-header {
-    display: flex; align-items: flex-start;
-    justify-content: space-between; margin-bottom: 16px;
-    flex-wrap: wrap; gap: 8px;
-  }
-  .timeline-role {
-    font-family: var(--font-display); font-size: 1.6rem;
-    font-weight: 600; color: var(--white); line-height: 1.2;
-  }
-  .timeline-company {
-    font-family: var(--font-mono); font-size: 0.72rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    color: var(--gold); margin-top: 4px;
-  }
-  .timeline-period {
-    font-family: var(--font-mono); font-size: 0.7rem;
-    color: var(--white-muted); white-space: nowrap;
-    border: 1px solid var(--border-subtle);
-    padding: 4px 12px; height: fit-content;
-  }
-  .timeline-desc {
-    font-size: 0.9rem; line-height: 1.8; color: var(--white-muted);
-    margin-bottom: 20px; max-width: 680px;
-  }
-  .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .timeline-bullets li {
-    font-size: 0.88rem; color: var(--white-dim); padding-left: 20px;
-    position: relative;
-  }
-  .timeline-bullets li::before {
-    content: '▸'; position: absolute; left: 0; color: var(--gold);
-    font-size: 0.75rem;
-  }
-
-  /* SKILLS */
-  #skills { background: var(--navy-mid); }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-  .skill-category {}
-  .skill-cat-title {
-    font-family: var(--font-mono); font-size: 0.68rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    color: var(--teal-light); margin-bottom: 24px;
-    padding-bottom: 12px; border-bottom: 1px solid var(--border-subtle);
-  }
-  .skill-bar-group { display: flex; flex-direction: column; gap: 16px; }
-  .skill-bar-item { display: flex; flex-direction: column; gap: 6px; }
-  .skill-bar-top { display: flex; justify-content: space-between; align-items: center; }
-  .skill-name { font-size: 0.88rem; color: var(--white-dim); }
-  .skill-pct { font-family: var(--font-mono); font-size: 0.7rem; color: var(--gold); }
-  .skill-track {
-    height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px;
-    overflow: hidden;
-  }
-  .skill-fill {
-    height: 100%; background: linear-gradient(to right, var(--teal), var(--gold));
-    border-radius: 2px; width: 0;
-    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .tools-section { margin-top: 64px; }
-  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 16px; }
-  .tool-chip {
-    background: rgba(10,15,30,0.8);
-    border: 1px solid var(--border-subtle);
-    padding: 16px 12px; text-align: center;
-    transition: all 0.3s ease;
-    cursor: default;
-  }
-  .tool-chip:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); transform: translateY(-3px); }
-  .tool-chip-icon { font-size: 1.4rem; margin-bottom: 8px; display: block; }
-  .tool-chip-name { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--white-dim); }
-
-  /* PROJECTS */
-  #projects { background: var(--navy); }
-  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-  .project-card {
-    position: relative; overflow: hidden;
-    aspect-ratio: 4/3;
-    background: var(--navy-light);
-    border: 1px solid var(--border-subtle);
-    cursor: pointer; group: true;
-  }
-  .project-card.featured { grid-column: span 2; aspect-ratio: 16/9; }
-  .project-card-bg {
-    position: absolute; inset: 0;
-    background: var(--navy-light);
-    transition: transform 0.5s ease;
-  }
-  .project-card:hover .project-card-bg { transform: scale(1.05); }
-  .project-num {
-    position: absolute; top: 20px; right: 20px;
-    font-family: var(--font-mono); font-size: 0.65rem;
-    color: rgba(201,168,76,0.4); letter-spacing: 0.1em;
-  }
-  .project-content {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 28px;
-    background: linear-gradient(to top, rgba(10,15,30,0.95) 30%, transparent 100%);
-    transform: translateY(30px);
-    transition: transform 0.4s ease;
-  }
-  .project-card:hover .project-content { transform: translateY(0); }
-  .project-cat {
-    font-family: var(--font-mono); font-size: 0.62rem;
-    text-transform: uppercase; letter-spacing: 0.2em;
-    color: var(--teal-light); margin-bottom: 8px;
-  }
-  .project-title {
-    font-family: var(--font-display); font-size: 1.4rem;
-    font-weight: 600; color: var(--white); line-height: 1.2;
-    margin-bottom: 10px;
-  }
-  .project-desc {
-    font-size: 0.82rem; color: var(--white-muted); line-height: 1.6;
-    opacity: 0; transform: translateY(8px);
-    transition: all 0.4s 0.1s ease;
-  }
-  .project-card:hover .project-desc { opacity: 1; transform: translateY(0); }
-  .project-tools {
-    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;
-    opacity: 0; transition: opacity 0.4s 0.15s;
-  }
-  .project-card:hover .project-tools { opacity: 1; }
-  .ptool {
-    font-family: var(--font-mono); font-size: 0.6rem;
-    text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
-    padding: 3px 8px;
-  }
-
-  .project-visual {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .pv-chart { width: 100%; height: 100%; padding: 20px; }
-
-  /* DASHBOARD MINI VISUALS */
-  .mini-bars { display: flex; align-items: flex-end; gap: 4px; height: 80px; padding: 0 8px; }
-  .mini-bar {
-    flex: 1; border-radius: 2px 2px 0 0;
-    background: linear-gradient(to top, var(--teal), var(--gold));
-    opacity: 0.4; animation: barGrow 1s ease forwards;
-  }
-  @keyframes barGrow { from { transform: scaleY(0); transform-origin: bottom; } to { transform: scaleY(1); } }
-  .mini-line-svg { width: 100%; height: 80px; opacity: 0.5; }
-
-  /* CONTACT */
-  #contact { background: var(--navy-mid); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  .contact-info {}
-  .contact-item {
-    display: flex; align-items: flex-start; gap: 20px;
-    padding: 24px 0; border-bottom: 1px solid var(--border-subtle);
-  }
-  .contact-item:last-of-type { border-bottom: none; }
-  .ci-icon {
-    width: 40px; height: 40px; border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--gold); font-size: 1rem; flex-shrink: 0;
-  }
-  .ci-label { font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--white-muted); margin-bottom: 4px; }
-  .ci-value { font-size: 0.92rem; color: var(--white-dim); }
-  .ci-value a { color: var(--white-dim); text-decoration: none; transition: color 0.2s; }
-  .ci-value a:hover { color: var(--gold); }
-
-  .contact-form { display: flex; flex-direction: column; gap: 20px; }
-  .form-group { display: flex; flex-direction: column; gap: 8px; }
-  .form-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--white-muted); }
-  .form-input, .form-textarea {
-    background: rgba(10,15,30,0.8);
-    border: 1px solid var(--border-subtle);
-    color: var(--white); padding: 14px 16px;
-    font-family: var(--font-body); font-size: 0.9rem;
-    transition: border-color 0.2s; outline: none;
-    resize: none;
-  }
-  .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-textarea { min-height: 120px; }
-  .form-submit {
-    background: var(--gold); color: var(--navy);
-    font-family: var(--font-mono); font-size: 0.75rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    padding: 16px; border: none; cursor: pointer;
-    font-weight: 500; transition: background 0.3s;
-  }
-  .form-submit:hover { background: var(--gold-light); }
-
-  /* FOOTER */
-  footer {
-    background: rgba(5,8,18,0.98);
-    border-top: 1px solid var(--border-subtle);
-    padding: 40px 60px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 16px;
-  }
-  .footer-logo { font-family: var(--font-display); font-size: 1.1rem; color: var(--white-dim); }
-  .footer-logo span { color: var(--gold); }
-  .footer-copy { font-family: var(--font-mono); font-size: 0.65rem; color: var(--white-muted); text-align: center; }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--white-muted); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold); }
-
-  /* FLOATING ELEMENTS */
-  .float-badge {
-    position: fixed; bottom: 40px; right: 40px; z-index: 50;
-    background: var(--gold); color: var(--navy);
-    width: 52px; height: 52px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; cursor: pointer;
-    box-shadow: 0 4px 24px rgba(201,168,76,0.35);
-    transition: all 0.3s ease; text-decoration: none;
-  }
-  .float-badge:hover { transform: scale(1.12) rotate(15deg); }
-
-  /* DIVIDER */
-  .gold-divider {
-    width: 48px; height: 2px; background: var(--gold); margin: 24px 0;
-  }
-
-  /* MARQUEE */
-  .marquee-section {
-    background: var(--gold); padding: 14px 0;
-    overflow: hidden; display: flex;
-  }
-  .marquee-track {
-    display: flex; gap: 0; white-space: nowrap;
-    animation: marquee 25s linear infinite;
-  }
-  .marquee-item {
-    font-family: var(--font-mono); font-size: 0.72rem;
-    text-transform: uppercase; letter-spacing: 0.15em;
-    color: var(--navy); padding: 0 40px;
-    display: flex; align-items: center; gap: 16px;
-  }
-  .marquee-item::after { content: '◆'; font-size: 0.4rem; opacity: 0.5; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeLeft {
-    from { opacity: 0; transform: translateX(24px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  .reveal {
-    opacity: 0; transform: translateY(20px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    section { padding: 80px 24px; }
-    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 48px; }
-    .hero-right { align-items: flex-start; }
-    .stats-card, .ticker-row { width: 100%; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: span 1; }
-    .contact-grid { grid-template-columns: 1fr; }
-    footer { padding: 24px; flex-direction: column; text-align: center; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--💡UPDATE: Change the title to your name-->
+    <title>Adeyemo Jamiu | Data Analysis Portfolio</title>
+      
+    <!--💡UPDATE: Add your favicon here. You can generate one at realfavicongenerator.net-->
+    <link rel="icon" type="image/png" href="/favicon-1111.png">
+    <link rel="apple-touch-icon" href="/favicon-1111.png">
+    
+    <!-- Google Fonts for Elegant Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Your Stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- Custom Cursor -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<!-- HEADER SECTION -->
+<header>
+    <div class="container">
+        <!--💡UPDATE: Change to your name and title-->
+        <h1>Adeyemo Jamiu</h1>
+        <p>Data Analyst | Power BI Developer | Business Intelligence Analyst</p>
+        <div class="social-links">
+            <!--💡UPDATE: Add your social media links and CV file-->
+            <a href="www.linkedin.com/in/adeyemo-jamiu-adewale-210605251" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/6rawny" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="assets/Your_Name_CV.pdf" download title="Download CV"><i class="fas fa-file-arrow-down"></i></a>
+        </div>
+    </div>
+</header>
 
-<!-- Navigation -->
-<nav id="navbar">
-  <a href="#" class="nav-logo">AJA<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="mailto:adeyemojamiu30@gmail.com" class="nav-cta">Hire Me</a>
+<!-- NAVIGATION -->
+<nav>
+    <div class="container">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
 </nav>
 
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid-overlay"></div>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Finance · Analytics · Intelligence</div>
-    <h1 class="hero-title">
-      Adeyemo
-      <em>Jamiu Adewale</em>
-    </h1>
-    <p class="hero-sub">Accountant · Business Intelligence Analyst · Data Strategist</p>
-    <p class="hero-desc">
-      Transforming complex financial and operational data into actionable insights through advanced analytics, real-time dashboards, and strategic intelligence. Currently at GTI Capital Limited, Abuja.
-    </p>
-    <div class="hero-actions">
-      <a href="#projects" class="btn-primary"><span>View Projects</span></a>
-      <a href="#contact" class="btn-outline">Get In Touch</a>
+<!-- ABOUT SECTION -->
+<section id="about" class="section">
+    <div class="container">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <!--💡UPDATE: Change the image to your own profile photo in assets/images/-->
+            <img src="photo_2026-06-06_05-16-30.jpg" alt="Your Name" class="profile-photo">
+            <div class="about-text">
+                <!--💡UPDATE: Write your own 'About Me' text here-->
+                <p> I'm a data professional with expertise in transforming complex datasets into actionable insights. My work focuses on creating interactive visualizations and data-driven stories that help organizations make informed decisions.</p>
+                <p>With experience in Power BI, SQL, and data modeling, I specialize in developing comprehensive reports that reveal hidden patterns and trends in data. This portfolio showcases my projects across various sectors.</p>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="stats-card">
-      <div class="stats-card-label">Years of Experience</div>
-      <div class="stats-card-value">3<span>+</span></div>
-      <div class="stats-card-sub">Finance, Analytics & BI <span class="delta">▲ Active</span></div>
-    </div>
-    <div class="stats-card">
-      <div class="stats-card-label">Projects Delivered</div>
-      <div class="stats-card-value">10<span>+</span></div>
-      <div class="stats-card-sub">Dashboards, Reports & Analyses <span class="delta">▲ Growing</span></div>
-    </div>
-    <div class="stats-card">
-      <div class="stats-card-label">Tools Mastered</div>
-      <div class="stats-card-value">7<span>+</span></div>
-      <div class="stats-card-sub">Power BI · MySQL · Excel · Xero <span class="delta">▲ In View: ICAN</span></div>
-    </div>
-    <div class="ticker-row">
-      <div class="ticker-item">
-        Power BI &nbsp;·&nbsp; DAX &nbsp;·&nbsp; MySQL &nbsp;·&nbsp; Excel &nbsp;·&nbsp; Looker Studio &nbsp;·&nbsp; Xero &nbsp;·&nbsp; Variance Analysis &nbsp;·&nbsp; Financial Modeling &nbsp;·&nbsp; KPI Tracking &nbsp;·&nbsp;
-        Power BI &nbsp;·&nbsp; DAX &nbsp;·&nbsp; MySQL &nbsp;·&nbsp; Excel &nbsp;·&nbsp; Looker Studio &nbsp;·&nbsp; Xero &nbsp;·&nbsp; Variance Analysis &nbsp;·&nbsp; Financial Modeling &nbsp;·&nbsp; KPI Tracking &nbsp;·&nbsp;
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- Marquee -->
-<div class="marquee-section">
-  <div class="marquee-track">
-    <span class="marquee-item">Financial Reporting</span>
-    <span class="marquee-item">Business Intelligence</span>
-    <span class="marquee-item">Data Analytics</span>
-    <span class="marquee-item">Dashboard Development</span>
-    <span class="marquee-item">Budgeting & Forecasting</span>
-    <span class="marquee-item">Treasury Management</span>
-    <span class="marquee-item">Process Optimization</span>
-    <span class="marquee-item">Stakeholder Reporting</span>
-    <span class="marquee-item">Financial Reporting</span>
-    <span class="marquee-item">Business Intelligence</span>
-    <span class="marquee-item">Data Analytics</span>
-    <span class="marquee-item">Dashboard Development</span>
-    <span class="marquee-item">Budgeting & Forecasting</span>
-    <span class="marquee-item">Treasury Management</span>
-    <span class="marquee-item">Process Optimization</span>
-    <span class="marquee-item">Stakeholder Reporting</span>
-  </div>
-</div>
+<!-- PROJECTS SECTION -->
+<section id="projects" class="section">
+    <div class="container">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
 
-<!-- About -->
-<section id="about">
-  <div class="reveal">
-    <div class="section-label">About</div>
-    <h2 class="section-title">The Person <em>Behind the Data</em></h2>
-    <div class="gold-divider"></div>
-  </div>
-  <div class="about-grid">
-    <div class="reveal">
-      <div class="about-placeholder">
-        <div class="about-placeholder-inner">
-          <div class="initials-badge">AJA</div>
-          <div style="font-family: var(--font-display); font-size: 1.2rem; color: var(--white-dim);">Adeyemo Jamiu</div>
-          <div style="font-family: var(--font-mono); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold); margin-top: 4px;">Finance Officer · GTI Capital</div>
-          <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 0.65rem; color: var(--white-muted);">Lugbe, FCT, Nigeria</div>
+            <!--💡UPDATE: Replace this with your own project. Add as many as you like!-->
+            <!-- Project 1 -->
+             <div class="project-card">
+                <!--💡UPDATE: Add a preview image of your project to assets/images/ -->
+                <img src="assets/images/project-placeholder-1.jpg" alt="Project One Preview">
+                <div class="project-card-content">
+                    <h3>Project Title One</h3>
+                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
+                    <div class="project-buttons">
+                        <!--💡UPDATE: Add link to your project's code/documentation on GitHub-->
+                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
+                        <!--💡UPDATE: Add link to your live dashboard (e.g., Power BI, Tableau Public)-->
+                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <img src="assets/images/project-placeholder-2.jpg" alt="Project Two Preview">
+                <div class="project-card-content">
+                    <h3>Project Title Two</h3>
+                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
+                    <div class="project-buttons">
+                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
+                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <img src="assets/images/project-placeholder-3.jpg" alt="Project Three Preview">
+                <div class="project-card-content">
+                    <h3>Project Title Three</h3>
+                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
+                    <div class="project-buttons">
+                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
+                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card">
+                <img src="assets/images/project-placeholder-4.jpg" alt="Project Four Preview">
+                <div class="project-card-content">
+                    <h3>Project Title Four</h3>
+                    <p>A brief, one or two-sentence description of your project, what it does, and the tools you used.</p>
+                    <div class="project-buttons">
+                        <a href="[YOUR_GITHUB_PROJECT_URL]" target="_blank" class="btn">Documentation</a>
+                        <a href="[YOUR_LIVE_DASHBOARD_URL]" target="_blank" class="btn btn-secondary">View Dashboard</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
-      </div>
     </div>
-
-    <div class="reveal">
-      <p class="about-text">
-        I am a <strong>results-driven Accountant and Business Intelligence Analyst</strong> with deep expertise in financial reporting, data analytics, budgeting, and treasury operations. My strength lies in bridging the gap between raw numbers and strategic decisions.
-      </p>
-      <p class="about-text">
-        At <strong>GTI Capital Limited</strong>, I maintain financial records, prepare management statements, and develop real-time dashboards that accelerate executive decision-making. Previously at Baker Industries, I combined accounting with business analysis — building KPI systems, process flowcharts, and BI solutions across multiple business units.
-      </p>
-      <p class="about-text">
-        I hold a <strong>B.Sc. Economics (Second Class Upper)</strong> from Ekiti State University, and I am currently pursuing the ICAN Professional Level. My certifications span Power BI, MySQL, Business Intelligence, and Financial Statement Analysis.
-      </p>
-
-      <div class="expertise-list">
-        <span class="expertise-tag">Financial Reporting</span>
-        <span class="expertise-tag">Power BI</span>
-        <span class="expertise-tag">DAX</span>
-        <span class="expertise-tag">MySQL</span>
-        <span class="expertise-tag">Budgeting</span>
-        <span class="expertise-tag">Treasury</span>
-        <span class="expertise-tag">Variance Analysis</span>
-        <span class="expertise-tag">Process Mapping</span>
-        <span class="expertise-tag">KPI Design</span>
-        <span class="expertise-tag">Xero</span>
-        <span class="expertise-tag">Payroll</span>
-        <span class="expertise-tag">Risk Analysis</span>
-      </div>
-
-      <div class="cert-grid">
-        <div class="cert-item"><span>01</span> ICAN (Professional Level – In View)</div>
-        <div class="cert-item"><span>02</span> Power BI Advanced Certification</div>
-        <div class="cert-item"><span>03</span> MySQL for Data Analytics (Coursera)</div>
-        <div class="cert-item"><span>04</span> Business Intelligence (CFI)</div>
-        <div class="cert-item"><span>05</span> Financial Statement Analysis (CFI)</div>
-        <div class="cert-item"><span>06</span> AAT — Accounting Technician</div>
-      </div>
-    </div>
-  </div>
 </section>
 
-<!-- Experience -->
-<section id="experience">
-  <div class="reveal">
-    <div class="section-label">Experience</div>
-    <h2 class="section-title">Career <em>Journey</em></h2>
-    <div class="gold-divider"></div>
-    <p class="section-desc">A track record of delivering financial clarity, operational efficiency, and data-driven insights across finance, business analysis, and public sector economics.</p>
-  </div>
+<!-- SKILLS SECTION -->
+<section id="skills" class="section">
+    <div class="container">
+        <h2>Technical Skillset</h2>
+        <div class="skills-table">
+            
+            <!--💡UPDATE: Customize your skills in each category-->
+            <!-- Column 1: Data Visualization -->
+            <div class="skill-column">
+                <div class="skill-header">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Data Visualization</h3>
+                </div>
+                <ul class="skill-list">
+                    <li>Power BI</li>
+                    <li>Tableau</li>
+                    <li>Looker Studio</li>
+                    <li>Excel Dashboards</li>
+                </ul>
+            </div>
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-header">
-        <div>
-          <div class="timeline-role">Finance Officer</div>
-          <div class="timeline-company">GTI Capital Limited — Abuja, Nigeria</div>
-        </div>
-        <div class="timeline-period">June 2025 – Present</div>
-      </div>
-      <p class="timeline-desc">Leading financial operations including general ledger management, statutory compliance, treasury oversight, and management reporting for a capital markets firm.</p>
-      <ul class="timeline-bullets">
-        <li>Maintain accurate financial records: general ledger, trial balances, and schedules</li>
-        <li>Prepare monthly P&L, balance sheets, and cash flow reports for management</li>
-        <li>Oversee PAYE, VAT, Withholding Tax, and pension remittances (100% compliance)</li>
-        <li>Manage payroll operations, bank reconciliations, and daily cash flow monitoring</li>
-        <li>Support treasury functions: fund placements, rollovers, and investment portfolio tracking</li>
-        <li>Prepare and submit regulatory reports compliant with SEC requirements</li>
-        <li>Developed Expenditure Dashboard for GTI Capital using Power BI (₦118.4M tracked)</li>
-      </ul>
-    </div>
+            <!-- Column 2: Data Analysis -->
+            <div class="skill-column">
+                <div class="skill-header">
+                    <i class="fas fa-search-plus"></i>
+                    <h3>Data Analysis</h3>
+                </div>
+                <ul class="skill-list">
+                    <li>SQL</li>
+                    <li>Advanced Excel</li>
+                    <li>Python (Pandas)</li>
+                    <li>Google Sheets</li>
+                </ul>
+            </div>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-header">
-        <div>
-          <div class="timeline-role">Business Analyst / Accountant</div>
-          <div class="timeline-company">Baker Industries Limited — Nigeria</div>
-        </div>
-        <div class="timeline-period">March 2022 – May 2025</div>
-      </div>
-      <p class="timeline-desc">Dual role combining financial accounting with business intelligence — designing dashboards, building KPI frameworks, and managing end-to-end financial operations across multiple business units.</p>
-      <ul class="timeline-bullets">
-        <li>Designed and presented dashboards communicating key insights to management</li>
-        <li>Built centralized KPI tracking systems improving employee accountability</li>
-        <li>Cleared and structured over 8 months of backlog accounting records</li>
-        <li>Managed accounts payable/receivable, inventory records, and procurement planning</li>
-        <li>Developed process flowcharts for real estate workflows (Baker Homes)</li>
-        <li>Built performance leaderboard dashboards tracking ₦51.7M marketer inflows</li>
-        <li>Conducted BCG Matrix & SWOT analysis across 3 business subsidiaries</li>
-      </ul>
-    </div>
+            <!-- Column 3: Data Modeling & ETL -->
+            <div class="skill-column">
+                <div class="skill-header">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Data Modeling & ETL</h3>
+                </div>
+                <ul class="skill-list">
+                    <li>Power Query (M)</li>
+                    <li>DAX</li>
+                    <li>Star Schema Design</li>
+                    <li>ETL Processes</li>
+                </ul>
+            </div>
 
-    <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-header">
-        <div>
-          <div class="timeline-role">NYSC Intern – Economic Planning</div>
-          <div class="timeline-company">Ministry of Economic Planning & Budget — Nigeria</div>
         </div>
-        <div class="timeline-period">September 2022 – October 2023</div>
-      </div>
-      <p class="timeline-desc">Contributed to public sector economic planning and budget analysis, supporting government policy evaluation and departmental communication.</p>
-      <ul class="timeline-bullets">
-        <li>Conducted in-depth research on economic policies and budget frameworks</li>
-        <li>Analyzed budgetary allocations to evaluate public sector program effectiveness</li>
-        <li>Prepared reports and presentation materials for workshops and policy discussions</li>
-        <li>Monitored government project implementation and provided progress reports</li>
-      </ul>
     </div>
-  </div>
 </section>
 
-<!-- Skills -->
-<section id="skills">
-  <div class="reveal">
-    <div class="section-label">Skills & Tools</div>
-    <h2 class="section-title">Technical <em>Proficiency</em></h2>
-    <div class="gold-divider"></div>
-    <p class="section-desc">A blend of financial expertise and analytical tooling — from building DAX measures in Power BI to writing complex SQL queries and structuring multi-entity financial reports.</p>
-  </div>
+<!-- CONTACT FORM SECTION -->
+<section id="contact" class="section">
+    <div class="container">
+        <h2>Send me a message</h2>
+        
+        <!--💡UPDATE: Go to formsubmit.co and replace the email with your own-->
+        <form action="https://formsubmit.co/adeyemojamiu30@gmail.com" method="POST" class="contact-form">
+            <p> Interested in collaborating or have questions about my work? I'd love to hear from you!</p>
 
-  <div class="skills-grid reveal">
-    <div class="skill-category">
-      <div class="skill-cat-title">Finance & Accounting</div>
-      <div class="skill-bar-group" id="financeSkills">
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Financial Reporting & Analysis</span><span class="skill-pct">95%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Budgeting & Forecasting</span><span class="skill-pct">90%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Treasury & Cash Flow</span><span class="skill-pct">88%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Regulatory Compliance</span><span class="skill-pct">92%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Financial Modelling</span><span class="skill-pct">85%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
-        </div>
-      </div>
-    </div>
+            <!-- Form Fields -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Your email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="subject" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea name="message" id="message" rows="6" placeholder="Your message" required></textarea>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn">Send Message</button>
 
-    <div class="skill-category">
-      <div class="skill-cat-title">Data & Business Intelligence</div>
-      <div class="skill-bar-group" id="analyticsSkills">
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Power BI & DAX</span><span class="skill-pct">93%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="93"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Excel & Google Sheets</span><span class="skill-pct">97%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="97"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">MySQL / SQL</span><span class="skill-pct">82%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="82"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Dashboard Development</span><span class="skill-pct">92%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span class="skill-name">Data Visualization</span><span class="skill-pct">90%</span></div>
-          <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
-        </div>
-      </div>
+        </form>
     </div>
-  </div>
-
-  <div class="tools-section reveal">
-    <div class="skill-cat-title" style="margin-bottom: 24px;">Technology Stack</div>
-    <div class="tools-grid">
-      <div class="tool-chip"><span class="tool-chip-icon">📊</span><span class="tool-chip-name">Power BI</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">🗃️</span><span class="tool-chip-name">MySQL</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">📈</span><span class="tool-chip-name">Excel</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">🔍</span><span class="tool-chip-name">Looker Studio</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">💼</span><span class="tool-chip-name">Xero</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">🤖</span><span class="tool-chip-name">Cognitive Bots</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">🗺️</span><span class="tool-chip-name">Draw.io</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">🎨</span><span class="tool-chip-name">Figma</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">📑</span><span class="tool-chip-name">PowerPoint</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">📋</span><span class="tool-chip-name">Google Sheets</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">📉</span><span class="tool-chip-name">MS Access</span></div>
-      <div class="tool-chip"><span class="tool-chip-icon">⚙️</span><span class="tool-chip-name">Power Query</span></div>
-    </div>
-  </div>
 </section>
 
-<!-- Projects -->
-<section id="projects">
-  <div class="reveal">
-    <div class="section-label">Featured Projects</div>
-    <h2 class="section-title">Intelligence <em>In Action</em></h2>
-    <div class="gold-divider"></div>
-    <p class="section-desc">A selection of dashboards, analyses, and BI solutions delivered across finance, real estate, agriculture, healthcare, and public sector domains.</p>
-  </div>
-
-  <div class="projects-grid reveal">
-    <!-- Project 1 -->
-    <div class="project-card featured">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #0d1e35 0%, #0a2030 100%);">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.25;">
-          <svg width="100%" height="100%" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet">
-            <rect x="40" y="180" width="40" height="80" fill="#1a8fa0" rx="2"/>
-            <rect x="100" y="120" width="40" height="140" fill="#c9a84c" rx="2"/>
-            <rect x="160" y="80" width="40" height="180" fill="#1a8fa0" rx="2"/>
-            <rect x="220" y="100" width="40" height="160" fill="#c9a84c" rx="2"/>
-            <rect x="280" y="60" width="40" height="200" fill="#1a8fa0" rx="2"/>
-            <rect x="340" y="90" width="40" height="170" fill="#c9a84c" rx="2"/>
-            <rect x="400" y="110" width="40" height="150" fill="#1a8fa0" rx="2"/>
-            <rect x="460" y="130" width="40" height="130" fill="#c9a84c" rx="2"/>
-            <polyline points="60,175 120,115 180,75 240,95 300,55 360,85 420,105 480,125" fill="none" stroke="#e8c97a" stroke-width="2"/>
-          </svg>
-        </div>
-      </div>
-      <div class="project-num">01 / 08</div>
-      <div class="project-content">
-        <div class="project-cat">Power BI · Financial Analytics</div>
-        <div class="project-title">Actual vs Budget Executive Dashboard</div>
-        <div class="project-desc">Real-time financial dashboard enabling executives to compare actual income and expenses against budget, with DAX-driven variance metrics, KPI cards, and trend visuals across 5 project IDs.</div>
-        <div class="project-tools">
-          <span class="ptool">Power BI</span>
-          <span class="ptool">DAX</span>
-          <span class="ptool">Variance Analysis</span>
-          <span class="ptool">Financial Reporting</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 2 -->
-    <div class="project-card">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #0f2010 0%, #0a1c0e 100%);">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.2;">
-          <svg width="80%" height="80%" viewBox="0 0 300 200">
-            <circle cx="150" cy="100" r="80" fill="none" stroke="#4cae7a" stroke-width="20"/>
-            <circle cx="150" cy="100" r="80" fill="none" stroke="#1a8fa0" stroke-width="20" stroke-dasharray="160 340" stroke-dashoffset="-100"/>
-          </svg>
-        </div>
-      </div>
-      <div class="project-num">02</div>
-      <div class="project-content">
-        <div class="project-cat">Power BI · Agribusiness</div>
-        <div class="project-title">Simple Farm Investment Dashboard</div>
-        <div class="project-desc">Investor analytics for Bakerverse Farms tracking ₦52.8M principal, 67 investors, cash inflow trends across SFI 2.0–6.0 cycles.</div>
-        <div class="project-tools">
-          <span class="ptool">Power BI</span>
-          <span class="ptool">Investment Analytics</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 3 -->
-    <div class="project-card">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #1a1020 0%, #0e0a18 100%);">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.2;">
-          <svg width="80%" height="80%" viewBox="0 0 300 200">
-            <rect x="10" y="50" width="260" height="30" fill="#c9a84c" rx="3"/>
-            <rect x="10" y="90" width="200" height="30" fill="#1a8fa0" rx="3"/>
-            <rect x="10" y="130" width="160" height="30" fill="#c9a84c" rx="3"/>
-            <rect x="10" y="170" width="120" height="30" fill="#1a8fa0" rx="3"/>
-          </svg>
-        </div>
-      </div>
-      <div class="project-num">03</div>
-      <div class="project-content">
-        <div class="project-cat">Power BI · Healthcare Finance</div>
-        <div class="project-title">St. Thomas' Hospital Finance Dashboard</div>
-        <div class="project-desc">£3M billing analysis dashboard with Zebra BI visuals, MoM variance charts, and patient-level insurance vs. out-of-pocket breakdowns.</div>
-        <div class="project-tools">
-          <span class="ptool">Power BI</span>
-          <span class="ptool">Zebra BI</span>
-          <span class="ptool">DAX</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 4 -->
-    <div class="project-card">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #1a1000 0%, #120c00 100%);">
-        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.2;">
-          <svg width="80%" height="80%" viewBox="0 0 300 200">
-            <text x="50%" y="55%" text-anchor="middle" font-size="80" fill="#c9a84c" font-weight="700">₦</text>
-          </svg>
-        </div>
-      </div>
-      <div class="project-num">04</div>
-      <div class="project-content">
-        <div class="project-cat">Power BI · Real Estate</div>
-        <div class="project-title">Baker Homes Finance Dashboard</div>
-        <div class="project-desc">₦662M sales dashboard with monthly revenue, top clients, target vs actual, and geographic sales mapping across Nigerian states.</div>
-        <div class="project-tools">
-          <span class="ptool">Power BI</span>
-          <span class="ptool">Real Estate</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 5 -->
-    <div class="project-card">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #001a20 0%, #001218 100%);">
-      </div>
-      <div class="project-num">05</div>
-      <div class="project-content">
-        <div class="project-cat">Power BI · Retail Analytics</div>
-        <div class="project-title">Adidas US Sales Insight Dashboard</div>
-        <div class="project-desc">$899.9M sales dashboard with retailer performance, geographic breakdown, product-level analysis, and post-COVID trend recovery visualization.</div>
-        <div class="project-tools">
-          <span class="ptool">Power BI</span>
-          <span class="ptool">Sales Analytics</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 6 -->
-    <div class="project-card">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #1a0e00 0%, #120a00 100%);">
-      </div>
-      <div class="project-num">06</div>
-      <div class="project-content">
-        <div class="project-cat">Excel · Government Data</div>
-        <div class="project-title">FAAC Fund Disbursement Dashboard</div>
-        <div class="project-desc">₦41.67T fund disbursement analysis across 36 states and 770 LGAs from 2007–2024 with geopolitical zone breakdown and annual trend mapping.</div>
-        <div class="project-tools">
-          <span class="ptool">Power BI</span>
-          <span class="ptool">Public Finance</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 7 -->
-    <div class="project-card">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #0a1a10 0%, #061208 100%);">
-      </div>
-      <div class="project-num">07</div>
-      <div class="project-content">
-        <div class="project-cat">Power BI · Agricultural Finance</div>
-        <div class="project-title">Bakerverse Farms Financial Performance</div>
-        <div class="project-desc">₦13.86M gross sales dashboard tracking harvest cycles, market sales, average price per crate, and quality ratio across 5 reporting periods.</div>
-        <div class="project-tools">
-          <span class="ptool">Power BI</span>
-          <span class="ptool">Agribusiness</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 8 -->
-    <div class="project-card">
-      <div class="project-card-bg" style="background: linear-gradient(135deg, #100010 0%, #0a000a 100%);">
-      </div>
-      <div class="project-num">08</div>
-      <div class="project-content">
-        <div class="project-cat">Strategic Analysis · Business</div>
-        <div class="project-title">BCG Matrix & SWOT Analysis</div>
-        <div class="project-desc">Multi-subsidiary strategic review covering Baker Homes (Star), Bakerverse Suites (Cash Cow), and Bakerverse Farms (Question Mark) informing resource reallocation.</div>
-        <div class="project-tools">
-          <span class="ptool">Strategy</span>
-          <span class="ptool">BCG Matrix</span>
-          <span class="ptool">SWOT</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<section id="contact">
-  <div class="reveal">
-    <div class="section-label">Contact</div>
-    <h2 class="section-title">Let's Build <em>Something</em></h2>
-    <div class="gold-divider"></div>
-    <p class="section-desc">Open to new opportunities in finance, business intelligence, and data analytics. Based in Abuja, Nigeria — available for remote and on-site engagements.</p>
-  </div>
-
-  <div class="contact-grid reveal">
-    <div class="contact-info">
-      <div class="contact-item">
-        <div class="ci-icon">✉</div>
-        <div>
-          <div class="ci-label">Email</div>
-          <div class="ci-value"><a href="mailto:adeyemojamiu30@gmail.com">adeyemojamiu30@gmail.com</a></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="ci-icon">☎</div>
-        <div>
-          <div class="ci-label">Phone</div>
-          <div class="ci-value"><a href="tel:+2347060821273">+234 706 082 1273</a></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="ci-icon">📍</div>
-        <div>
-          <div class="ci-label">Location</div>
-          <div class="ci-value">Lugbe, FCT — Abuja, Nigeria</div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="ci-icon">in</div>
-        <div>
-          <div class="ci-label">LinkedIn</div>
-          <div class="ci-value"><a href="https://www.linkedin.com/in/adeyemo-jamiu-210605251" target="_blank">adeyemo-jamiu-210605251</a></div>
-        </div>
-      </div>
-      <div class="contact-item">
-        <div class="ci-icon">🏢</div>
-        <div>
-          <div class="ci-label">Current Position</div>
-          <div class="ci-value">Finance Officer — GTI Capital Limited</div>
-        </div>
-      </div>
-    </div>
-
-    <form class="contact-form" onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">First Name</label>
-          <input type="text" class="form-input" placeholder="John" />
-        </div>
-        <div class="form-group">
-          <label class="form-label">Last Name</label>
-          <input type="text" class="form-input" placeholder="Doe" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="john@company.com" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Subject</label>
-        <input type="text" class="form-input" placeholder="Project / Opportunity / Collaboration" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Message</label>
-        <textarea class="form-textarea" placeholder="Tell me about your project, data challenge, or opportunity..."></textarea>
-      </div>
-      <button type="submit" class="form-submit" id="submitBtn">Send Message →</button>
-    </form>
-  </div>
-</section>
-
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">AJA<span>.</span></div>
-  <div class="footer-copy">© 2025 Adeyemo Jamiu Adewale · All Rights Reserved</div>
-  <div class="footer-links">
-    <a href="mailto:adeyemojamiu30@gmail.com">Email</a>
-    <a href="https://www.linkedin.com/in/adeyemo-jamiu-210605251" target="_blank">LinkedIn</a>
-    <a href="#home">Top ↑</a>
-  </div>
+    <div class="container">
+        <!--💡UPDATE: Change the year and your name-->
+        <p>&copy; 2026 Adeyemo Jamiu. All rights reserved.</p>
+    </div>
 </footer>
 
-<!-- Back to Top -->
-<a href="#home" class="float-badge" title="Back to top">↑</a>
+<script src="assets/js/main.js"></script>
 
-<script>
-  // Custom Cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursor.style.left = mouseX - 5 + 'px';
-    cursor.style.top = mouseY - 5 + 'px';
-  });
-
-  function animateRing() {
-    ringX += (mouseX - ringX - 18) * 0.12;
-    ringY += (mouseY - ringY - 18) * 0.12;
-    ring.style.left = ringX + 'px';
-    ring.style.top = ringY + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button, .project-card, .tool-chip, .stats-card').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
-  });
-
-  // Navbar scroll
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => observer.observe(r));
-
-  // Skill bars
-  const skillObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.skill-fill').forEach(fill => {
-          const w = fill.dataset.width;
-          setTimeout(() => { fill.style.width = w + '%'; }, 200);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.skills-grid').forEach(el => skillObserver.observe(el));
-
-  // Form submit
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    btn.textContent = 'Message Sent ✓';
-    btn.style.background = '#4cae7a';
-    btn.style.color = '#fff';
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 3000);
-  }
-
-  // Smooth active nav
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => {
-      if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
-    });
-    navLinks.forEach(a => {
-      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
-    });
-  });
-</script>
 </body>
 </html>
