@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Adeyemo Jamiu Adewale — Data, Finance & Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --white: #FFFFFF; --gray-soft: #F5F5F7; --gray-mid: #E8E8ED;
+  --gray-dark: #86868B; --gray-darker: #6E6E73;
+  --black: #1D1D1F; --black-deep: #000000;
+  --blue: #0071E3; --blue-hover: #0077ED; --blue-pale: rgba(0,113,227,0.08);
+  --glass-bg: rgba(255,255,255,0.72); --glass-border: rgba(255,255,255,0.45);
+  --glass-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  --radius: 18px; --radius-lg: 28px; --radius-xl: 40px;
+  --ease: cubic-bezier(0.4,0,0.2,1);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #1C1C1E; --gray-soft: #2C2C2E; --gray-mid: #3A3A3C;
+    --gray-dark: #636366; --gray-darker: #8E8E93;
+    --black: #F5F5F7; --black-deep: #FFFFFF;
+    --glass-bg: rgba(28,28,30,0.85); --glass-border: rgba(255,255,255,0.1);
+    --glass-shadow: 0 8px 40px rgba(0,0,0,0.4); --blue-pale: rgba(0,113,227,0.12);
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--black);font-family:var(--font);font-weight:400;
+  line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{font-family:var(--font);cursor:pointer}
+::-webkit-scrollbar{width:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;
+  justify-content:space-between;padding:0 48px;height:52px;
+  background:rgba(255,255,255,0.82);backdrop-filter:saturate(180%) blur(24px);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  border-bottom:0.5px solid rgba(0,0,0,0.08);transition:background 0.3s var(--ease)}
+@media(prefers-color-scheme:dark){nav{background:rgba(0,0,0,0.78);border-bottom:0.5px solid rgba(255,255,255,0.08)}}
+.nav-logo{font-size:1.1rem;font-weight:700;color:var(--black);letter-spacing:-0.02em}
+.nav-logo span{color:var(--blue)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:400;color:var(--gray-darker);transition:color 0.2s;letter-spacing:0.01em}
+.nav-links a:hover,.nav-links a.active{color:var(--blue)}
+.nav-cta{background:var(--blue);color:#fff;font-size:0.78rem;font-weight:500;
+  padding:7px 18px;border-radius:980px;transition:background 0.2s,transform 0.2s}
+.nav-cta:hover{background:var(--blue-hover);transform:scale(1.02)}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--black);border-radius:2px;transition:all 0.3s}
+.mobile-drawer{position:fixed;top:52px;left:0;right:0;z-index:999;
+  background:rgba(255,255,255,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  padding:24px 32px;border-bottom:0.5px solid var(--gray-mid);
+  transform:translateY(-10px);opacity:0;pointer-events:none;transition:all 0.25s var(--ease);
+  display:flex;flex-direction:column}
+.mobile-drawer.open{transform:translateY(0);opacity:1;pointer-events:all}
+.mobile-drawer a{font-size:1rem;font-weight:500;color:var(--black);padding:14px 0;
+  border-bottom:0.5px solid var(--gray-mid);transition:color 0.2s}
+.mobile-drawer a:last-child{border-bottom:none}
+.mobile-drawer a:hover{color:var(--blue)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:120px 24px 80px;
+  background:var(--white);position:relative;overflow:hidden}
+.hero-ambient{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(80px)}
+.blob-1{width:600px;height:600px;background:radial-gradient(circle,#0071E3 0%,transparent 70%);top:-200px;right:-100px;opacity:0.1}
+.blob-2{width:400px;height:400px;background:radial-gradient(circle,#30B0C7 0%,transparent 70%);bottom:0;left:-100px;opacity:0.08}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-pale);
+  border:0.5px solid rgba(0,113,227,0.2);border-radius:980px;padding:6px 14px;
+  font-size:0.75rem;font-weight:500;color:var(--blue);letter-spacing:0.01em;
+  margin-bottom:28px;opacity:0;animation:fadeUp 0.6s 0.1s var(--ease) forwards}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+.hero-title{font-size:clamp(52px,8vw,90px);font-weight:800;line-height:1.02;
+  letter-spacing:-0.04em;color:var(--black-deep);max-width:900px;margin:0 auto 20px;
+  opacity:0;animation:fadeUp 0.7s 0.2s var(--ease) forwards}
+.hero-title .accent{color:var(--blue)}
+.hero-sub{font-size:clamp(1.1rem,2.5vw,1.45rem);font-weight:400;color:var(--gray-darker);
+  max-width:580px;margin:0 auto 40px;letter-spacing:-0.01em;line-height:1.55;
+  opacity:0;animation:fadeUp 0.7s 0.35s var(--ease) forwards}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fadeUp 0.7s 0.5s var(--ease) forwards}
+.btn-primary{background:var(--blue);color:#fff;font-size:0.9rem;font-weight:500;
+  padding:14px 30px;border-radius:980px;transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
+  letter-spacing:-0.01em;box-shadow:0 2px 12px rgba(0,113,227,0.3)}
+.btn-primary:hover{background:var(--blue-hover);transform:scale(1.02);box-shadow:0 4px 20px rgba(0,113,227,0.4)}
+.btn-secondary{background:var(--gray-soft);color:var(--black);font-size:0.9rem;font-weight:500;
+  padding:14px 30px;border-radius:980px;transition:background 0.2s,transform 0.2s;letter-spacing:-0.01em}
+.btn-secondary:hover{background:var(--gray-mid);transform:scale(1.02)}
+.hero-stats{display:flex;gap:0;margin-top:72px;opacity:0;animation:fadeUp 0.7s 0.65s var(--ease) forwards;
+  border-top:0.5px solid var(--gray-mid);padding-top:48px}
+.hero-stat{flex:1;text-align:center;padding:0 32px;border-right:0.5px solid var(--gray-mid)}
+.hero-stat:last-child{border-right:none}
+.hero-stat-num{font-size:clamp(2rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.04em;
+  color:var(--black-deep);line-height:1;margin-bottom:6px}
+.hero-stat-num span{color:var(--blue)}
+.hero-stat-label{font-size:0.8rem;color:var(--gray-darker);font-weight:400}
+
+/* SECTIONS */
+section{padding:120px 48px}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-eyebrow{font-size:0.8rem;font-weight:600;color:var(--blue);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px}
+.section-title{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;letter-spacing:-0.04em;color:var(--black-deep);line-height:1.08;margin-bottom:20px}
+.section-title .accent{color:var(--blue)}
+.section-title .light{font-weight:300}
+.section-desc{font-size:1.05rem;color:var(--gray-darker);max-width:560px;line-height:1.7;font-weight:400;letter-spacing:-0.005em}
+.section-divider{width:100%;height:0.5px;background:var(--gray-mid)}
+
+/* ABOUT */
+#about{background:var(--gray-soft)}
+.about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center}
+.about-card{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:0.5px solid var(--glass-border);border-radius:var(--radius-xl);box-shadow:var(--glass-shadow);
+  padding:48px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;
+  position:relative;overflow:hidden}
+.about-card::before{content:'';position:absolute;top:-40%;left:-40%;width:80%;height:80%;
+  background:radial-gradient(circle,rgba(0,113,227,0.06) 0%,transparent 70%);pointer-events:none}
+
+/* ── PROFILE PHOTO — swap AJA initials for a real image ── */
+.about-avatar{width:120px;height:120px;border-radius:50%;overflow:hidden;
+  border:3px solid rgba(0,113,227,0.2);box-shadow:0 8px 32px rgba(0,113,227,0.2);flex-shrink:0}
+.about-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.about-avatar-fallback{width:120px;height:120px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue) 0%,#30B0C7 100%);
+  display:flex;align-items:center;justify-content:center;font-size:2.4rem;
+  font-weight:800;color:#fff;box-shadow:0 8px 32px rgba(0,113,227,0.3);letter-spacing:-0.03em}
+
+.about-name{font-size:1.4rem;font-weight:700;letter-spacing:-0.03em;color:var(--black-deep)}
+.about-role{font-size:0.85rem;font-weight:500;color:var(--blue);letter-spacing:0.01em}
+.about-location{font-size:0.82rem;color:var(--gray-darker);display:flex;align-items:center;gap:6px}
+.about-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.about-pill{background:var(--blue-pale);border:0.5px solid rgba(0,113,227,0.15);color:var(--blue);
+  font-size:0.72rem;font-weight:500;padding:5px 12px;border-radius:980px}
+.about-connect{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.about-link{background:var(--gray-soft);border:0.5px solid var(--gray-mid);border-radius:980px;
+  padding:8px 16px;font-size:0.78rem;font-weight:500;color:var(--black);transition:all 0.2s;
+  display:flex;align-items:center;gap:6px}
+.about-link:hover{background:var(--blue);color:#fff;border-color:var(--blue);transform:translateY(-1px)}
+.about-text{font-size:1.02rem;line-height:1.8;color:var(--gray-dark);margin-bottom:24px;
+  font-weight:400;letter-spacing:-0.005em}
+.about-text strong{color:var(--black);font-weight:600}
+.certs-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:32px}
+.cert-card{background:var(--glass-bg);backdrop-filter:blur(12px);border:0.5px solid var(--glass-border);
+  border-radius:var(--radius);padding:16px 18px;display:flex;align-items:flex-start;gap:12px;
+  transition:transform 0.2s,box-shadow 0.2s}
+.cert-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.cert-icon{width:32px;height:32px;border-radius:8px;background:var(--blue-pale);
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0}
+.cert-name{font-size:0.78rem;font-weight:600;color:var(--black);line-height:1.3}
+.cert-body{font-size:0.68rem;color:var(--gray-darker);margin-top:2px}
+
+/* EXPERIENCE */
+#experience{background:var(--white)}
+.exp-list{display:flex;flex-direction:column;gap:16px;margin-top:64px}
+.exp-item{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:0.5px solid var(--gray-mid);border-radius:var(--radius-lg);padding:40px 48px;
+  transition:box-shadow 0.3s,transform 0.3s;position:relative;overflow:hidden}
+.exp-item::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,var(--blue),#30B0C7);opacity:0;transition:opacity 0.3s}
+.exp-item:hover{box-shadow:0 20px 60px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.exp-item:hover::before{opacity:1}
+.exp-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:16px;flex-wrap:wrap}
+.exp-role{font-size:1.4rem;font-weight:700;letter-spacing:-0.03em;color:var(--black-deep);line-height:1.2}
+.exp-company{font-size:0.88rem;font-weight:500;color:var(--blue);margin-top:4px}
+.exp-period{background:var(--gray-soft);border:0.5px solid var(--gray-mid);border-radius:980px;
+  padding:5px 14px;font-size:0.75rem;font-weight:500;color:var(--gray-darker);white-space:nowrap;height:fit-content;flex-shrink:0}
+.exp-current{background:rgba(0,113,227,0.08);color:var(--blue);border-color:rgba(0,113,227,0.2)}
+.exp-desc{font-size:0.92rem;line-height:1.75;color:var(--gray-dark);margin-bottom:20px;max-width:680px}
+.exp-bullets{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;list-style:none}
+.exp-bullets li{font-size:0.85rem;color:var(--gray-darker);padding-left:16px;position:relative;line-height:1.5}
+.exp-bullets li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+
+/* SKILLS */
+#skills{background:var(--gray-soft)}
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:64px}
+.skill-group-label{font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;
+  color:var(--gray-darker);margin-bottom:28px;padding-bottom:14px;border-bottom:0.5px solid var(--gray-mid)}
+.skill-rows{display:flex;flex-direction:column;gap:20px}
+.skill-row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.skill-row-name{font-size:0.9rem;font-weight:500;color:var(--black);letter-spacing:-0.01em}
+.skill-row-val{font-size:0.78rem;font-weight:600;color:var(--blue)}
+.skill-track{height:4px;background:var(--gray-mid);border-radius:980px;overflow:hidden}
+.skill-fill{height:100%;width:0;background:linear-gradient(to right,var(--blue),#30B0C7);
+  border-radius:980px;transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
+.tools-wall{margin-top:72px;background:var(--glass-bg);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);border:0.5px solid var(--glass-border);
+  border-radius:var(--radius-xl);padding:48px;box-shadow:var(--glass-shadow)}
+.tools-wall-title{font-size:1.1rem;font-weight:700;letter-spacing:-0.03em;color:var(--black-deep);margin-bottom:28px}
+.tools-chips{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ── TOOL CHIP — supports real icon image OR emoji fallback ── */
+.tool-chip{background:var(--white);border:0.5px solid var(--gray-mid);border-radius:980px;
+  padding:9px 18px;font-size:0.82rem;font-weight:500;color:var(--black);letter-spacing:-0.01em;
+  display:flex;align-items:center;gap:8px;transition:all 0.2s;cursor:default}
+.tool-chip:hover{background:var(--blue);color:#fff;border-color:var(--blue);
+  transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,113,227,0.25)}
+.tool-chip:hover .tool-icon-img{filter:brightness(0) invert(1)}
+.tool-icon-img{width:18px;height:18px;object-fit:contain;transition:filter 0.2s;flex-shrink:0}
+.tool-icon-emoji{font-size:1rem;line-height:1}
+
+/* PROJECTS */
+#projects{background:var(--white)}
+.projects-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:64px;flex-wrap:wrap}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.project-card{background:var(--gray-soft);border:0.5px solid var(--gray-mid);border-radius:var(--radius-xl);
+  overflow:hidden;transition:transform 0.3s var(--ease),box-shadow 0.3s var(--ease);
+  position:relative;cursor:pointer;display:flex;flex-direction:column}
+.project-card:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,0.1)}
+.project-card.featured{grid-column:span 2}
+
+/* ── PROJECT PREVIEW IMAGE AREA ── */
+.project-preview{position:relative;overflow:hidden;height:200px}
+.project-card.featured .project-preview{height:260px}
+.project-preview-img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 0.5s var(--ease)}
+.project-card:hover .project-preview-img{transform:scale(1.04)}
+.project-preview-fallback{width:100%;height:100%;display:flex;align-items:center;
+  justify-content:center;font-size:3.5rem;opacity:0.5}
+
+/* ── HOVER OVERLAY — "View Project" button appears on hover ── */
+.project-overlay{position:absolute;inset:0;background:rgba(0,113,227,0.88);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.3s var(--ease)}
+.project-card:hover .project-overlay{opacity:1}
+.project-overlay-btn{background:#fff;color:var(--blue);font-size:0.82rem;font-weight:700;
+  padding:11px 26px;border-radius:980px;letter-spacing:-0.01em;
+  transform:translateY(8px);transition:transform 0.3s var(--ease);
+  box-shadow:0 4px 16px rgba(0,0,0,0.15);white-space:nowrap}
+.project-card:hover .project-overlay-btn{transform:translateY(0)}
+
+.project-body{padding:28px 28px 32px;flex:1;display:flex;flex-direction:column}
+.project-cat{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue);margin-bottom:8px}
+.project-title{font-size:1.15rem;font-weight:700;letter-spacing:-0.03em;color:var(--black-deep);line-height:1.3;margin-bottom:10px}
+.project-desc{font-size:0.85rem;color:var(--gray-darker);line-height:1.65;margin-bottom:20px;flex:1}
+.project-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:auto}
+.project-tags{display:flex;gap:6px;flex-wrap:wrap}
+.project-tag{background:var(--glass-bg);border:0.5px solid var(--gray-mid);border-radius:980px;
+  padding:4px 10px;font-size:0.7rem;font-weight:500;color:var(--gray-darker)}
+.project-link-badge{display:flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:600;color:var(--blue)}
+.project-link-badge:hover{opacity:0.7}
+
+/* HIGHLIGHTS BAND */
+.highlights-band{background:var(--black-deep);padding:80px 48px}
+.highlights-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.hl-item{padding:40px 32px;border-right:0.5px solid rgba(255,255,255,0.08);text-align:center}
+.hl-item:last-child{border-right:none}
+.hl-num{font-size:clamp(2.4rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.05em;color:#fff;margin-bottom:8px;line-height:1}
+.hl-num span{color:var(--blue)}
+.hl-label{font-size:0.82rem;color:rgba(255,255,255,0.45);font-weight:400}
+
+/* CONTACT */
+#contact{background:var(--gray-soft)}
+.contact-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start;margin-top:64px}
+.contact-info{display:flex;flex-direction:column;gap:16px}
+.contact-info-item{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:0.5px solid var(--glass-border);border-radius:var(--radius);padding:20px 24px;
+  display:flex;align-items:center;gap:16px;transition:transform 0.2s,box-shadow 0.2s}
+.contact-info-item:hover{transform:translateX(4px);box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+.cii-icon{width:42px;height:42px;border-radius:12px;background:var(--blue-pale);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.cii-label{font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--gray-darker);margin-bottom:3px}
+.cii-value{font-size:0.9rem;font-weight:500;color:var(--black);letter-spacing:-0.01em}
+.cii-value a{color:var(--blue);transition:opacity 0.2s}
+.cii-value a:hover{opacity:0.7}
+.contact-form{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:0.5px solid var(--glass-border);border-radius:var(--radius-xl);padding:44px 44px 40px;box-shadow:var(--glass-shadow)}
+.form-title{font-size:1.3rem;font-weight:700;letter-spacing:-0.03em;margin-bottom:28px;color:var(--black-deep)}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-label{font-size:0.75rem;font-weight:600;color:var(--gray-darker);letter-spacing:0.02em}
+.form-input,.form-textarea{background:var(--white);border:0.5px solid var(--gray-mid);border-radius:12px;
+  padding:13px 16px;font-family:var(--font);font-size:0.9rem;color:var(--black);outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;resize:none}
+.form-input:focus,.form-textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,113,227,0.12)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--gray-darker);opacity:0.6}
+.form-textarea{min-height:110px}
+.form-submit{width:100%;background:var(--blue);color:#fff;font-size:0.92rem;font-weight:600;
+  padding:15px;border:none;border-radius:980px;letter-spacing:-0.01em;
+  transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 2px 12px rgba(0,113,227,0.3);margin-top:8px}
+.form-submit:hover{background:var(--blue-hover);transform:scale(1.01);box-shadow:0 4px 20px rgba(0,113,227,0.4)}
+
+/* FOOTER */
+footer{background:var(--black-deep);padding:48px;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-brand{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:-0.02em}
+.footer-brand span{color:var(--blue)}
+.footer-copy{font-size:0.78rem;color:rgba(255,255,255,0.3);letter-spacing:0.01em;text-align:center}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:0.78rem;color:rgba(255,255,255,0.4);transition:color 0.2s}
+.footer-links a:hover{color:#fff}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}
+.reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 24px}.nav-links{display:none}.nav-hamburger{display:flex}
+  section{padding:80px 24px}
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .certs-grid{grid-template-columns:1fr}
+  .skills-layout{grid-template-columns:1fr;gap:48px}
+  .projects-grid{grid-template-columns:1fr}.project-card.featured{grid-column:span 1}
+  .contact-wrap{grid-template-columns:1fr}
+  footer{padding:32px 24px;flex-direction:column;text-align:center}
+  .hero-stats{flex-direction:column;gap:24px}
+  .hero-stat{border-right:none;border-bottom:0.5px solid var(--gray-mid);padding:16px 0}
+  .hero-stat:last-child{border-bottom:none}
+  .highlights-inner{grid-template-columns:1fr 1fr}
+  .hl-item:nth-child(2){border-right:none}
+  .exp-bullets{grid-template-columns:1fr}
+  .contact-form{padding:28px 24px}.tools-wall{padding:28px}
+}
+@media(max-width:600px){
+  .highlights-inner{grid-template-columns:1fr}
+  .hl-item{border-right:none;border-bottom:0.5px solid rgba(255,255,255,0.08)}
+  .hl-item:last-child{border-bottom:none}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ==============================================================
+  ✏️  ALL EDITABLE CONTENT LIVES IN THIS SCRIPT BLOCK
+  ==============================================================
+  STEP 1 — Set your GitHub base URL (do this once):
+    Replace YOUR_USERNAME and YOUR_REPO with your values.
+    Every image and icon path below updates automatically.
+
+  STEP 2 — Recommended folder structure in your repo:
+    index.html
+    assets/
+      images/
+        profile.jpg                ← your profile photo
+        projects/
+          project-01.png
+          project-02.png
+          ...
+      icons/
+        powerbi.png
+        excel.png
+        mysql.png
+        ...
+
+  STEP 3 — To add a new project, copy the template at the
+    bottom of the PROJECTS array and fill it in.
+  ============================================================== -->
+<script>
+/* ── 1. GITHUB BASE URL ─────────────────────────────────────── */
+const GITHUB = "https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/assets";
+
+/* ── 2. PROFILE ─────────────────────────────────────────────── */
+const PROFILE = {
+  name:     "Adeyemo Jamiu Adewale",
+  role:     "Accountant & Data Analyst",
+  location: "Lagos, Nigeria",
+  initials: "AJA",
+
+  // ✏️ Upload your photo to assets/images/ then update filename below.
+  // If the image is missing or fails to load, the "AJA" badge shows automatically.
+  profilePhoto: `${GITHUB}/images/photo_2026-06-06_05-16-30.jpg`,
+
+  email:    "adeyemojamiu30@gmail.com",
+  phone:    "+234 706 082 1273",
+  linkedin: "https://www.linkedin.com/in/adeyemo-jamiu-210605251",
+
+  pills: ["Accountant", "BI Analyst", "Data Strategist", "ACA (In View)"],
+
+  // ✏️ Edit your bio paragraphs here. HTML tags like <strong> are supported.
+  bio: [
+    `Data tells stories, but most organizations only see the numbers. My work sits at the intersection of business strategy, finance, and analytics, where data is transformed into clarity, direction, and measurable outcomes. With a foundation in finance and a passion for business intelligence, I specialize in uncovering patterns hidden within complex datasets and translating them into insights that executives, managers, and stakeholders can act on with confidence. Whether analyzing financial performance, designing executive dashboards, or building data models that power strategic decisions, my focus is always on answering one question: <strong>What is the data trying to tell us?</strong>`,
+    `I enjoy solving business problems through analytics, combining technical expertise in Power BI, SQL, Excel, and data modeling with a deep understanding of how organizations operate. My experience spans financial analytics, investment reporting, treasury operations, KPI management, and performance measurement, allowing me to connect business objectives with the metrics that truly matter. Currently, I am expanding my expertise in Business Intelligence by developing advanced analytical solutions that enable organizations to move beyond reporting and toward predictive, insight-driven decision-making.`,
+    `I hold a <strong>B.Sc. Economics (2:1)</strong> from Ekiti State University and hold certifications in Power BI, MySQL, AAT, CFI Business Intelligence, and Financial Statement Analysis.`,
+  ],
+};
+
+/* ── 3. CERTIFICATIONS ──────────────────────────────────────── */
+const CERTS = [
+  { icon: "🎓", name: "ICAN Professional",           body: "In View" },
+  { icon: "📊", name: "Power BI Advanced",            body: "Certified" },
+  { icon: "🗃️", name: "MySQL for Analytics",          body: "Coursera" },
+  { icon: "📈", name: "Financial Statement Analysis", body: "CFI" },
+  { icon: "🧠", name: "Business Intelligence",        body: "CFI Certified" },
+  { icon: "🏅", name: "AAT",                          body: "Accounting Technician" },
+];
+
+/* ── 4. EXPERIENCE ───────────────────────────────────────────── */
+const EXPERIENCE = [
+  {
+    role:    "Finance Officer",
+    company: "GTI Capital Limited — Abuja, Nigeria",
+    period:  "June 2025 – Present",
+    current: true,
+    desc:    "Leading full-cycle financial operations for a capital markets firm — from general ledger management and statutory remittances to treasury oversight and real-time BI dashboarding.",
+    bullets: [
+      "General ledger, trial balances & financial schedules",
+      "Monthly P&L, balance sheets & cash flow reports",
+      "PAYE, VAT, WHT & pension compliance (100%)",
+      "Treasury — fund placements & investment tracking",
+      "Bank reconciliations & daily liquidity monitoring",
+      "SEC regulatory reporting & filings",
+      "Built GTI Capital Expenditure Dashboard (₦118.4M)",
+      "Payroll computation & disbursement management",
+    ],
+  },
+  {
+    role:    "Business Analyst / Accountant",
+    company: "Baker Industries Limited — Nigeria",
+    period:  "March 2022 – May 2025",
+    current: false,
+    desc:    "Dual role combining financial accounting with business intelligence — designing dashboards, building KPI frameworks, and conducting strategic analysis across real estate, agriculture, and hospitality subsidiaries.",
+    bullets: [
+      "Executive dashboards & management reporting",
+      "Cleared 8+ months of backlog accounting records",
+      "BCG Matrix & SWOT analysis across 3 subsidiaries",
+      "₦51.7M marketer performance leaderboard",
+      "Accounts payable/receivable & inventory management",
+      "Real estate workflow process flowcharts",
+      "KPI tracking & employee accountability systems",
+      "Procurement planning & stock control",
+    ],
+  },
+  {
+    role:    "NYSC Intern — Economic Planning",
+    company: "Ministry of Economic Planning & Budget — Nigeria",
+    period:  "Sep 2022 – Oct 2023",
+    current: false,
+    desc:    "Contributed to public sector economic planning, budget framework analysis, and policy evaluation — supporting data-driven decision making at the state government level.",
+    bullets: [
+      "Economic policy research & budget analysis",
+      "Budgetary allocation effectiveness evaluation",
+      "Workshop reports & policy discussion materials",
+      "Government project implementation monitoring",
+    ],
+  },
+];
+
+/* ── 5. SKILLS ───────────────────────────────────────────────── */
+const SKILLS = {
+  left: {
+    label: "Finance & Accounting",
+    items: [
+      { name: "Financial Reporting & Analysis",  pct: 95 },
+      { name: "Budgeting & Forecasting",          pct: 90 },
+      { name: "Treasury & Cash Flow Management",  pct: 88 },
+      { name: "Statutory Compliance",             pct: 93 },
+      { name: "Financial Modelling",              pct: 85 },
+    ],
+  },
+  right: {
+    label: "Data & Business Intelligence",
+    items: [
+      { name: "Power BI & DAX",         pct: 93 },
+      { name: "Excel & Google Sheets",  pct: 97 },
+      { name: "MySQL / SQL",            pct: 82 },
+      { name: "Dashboard Development",  pct: 92 },
+      { name: "Data Visualization",     pct: 90 },
+    ],
+  },
+};
+
+/* ── 6. TOOLS ────────────────────────────────────────────────── */
+// Each tool has:
+//   icon  → path to an image file in your assets/icons/ folder.
+//           Leave "" to use the emoji fallback instead.
+//   emoji → shown if icon path is empty or the image fails to load.
+//
+// To use a real icon:  icon: `${GITHUB}/icons/powerbi.png`
+// To use emoji only:   icon: ""
+const TOOLS = [
+  { name: "Power BI",        icon: `${GITHUB}/icons/powerbi.png`,   emoji: "📊" },
+  { name: "MySQL",           icon: `${GITHUB}/icons/mysql.png`,      emoji: "🗃️" },
+  { name: "Microsoft Excel", icon: `${GITHUB}/icons/excel.png`,      emoji: "📈" },
+  { name: "Looker Studio",   icon: `${GITHUB}/icons/looker.png`,     emoji: "🔍" },
+  { name: "Xero",            icon: `${GITHUB}/icons/xero.png`,       emoji: "💼" },
+  { name: "Cognitive Bots",  icon: "",                               emoji: "🤖" },
+  { name: "Draw.io",         icon: `${GITHUB}/icons/drawio.png`,     emoji: "🗺️" },
+  { name: "Figma",           icon: `${GITHUB}/icons/figma.png`,      emoji: "🎨" },
+  { name: "PowerPoint",      icon: `${GITHUB}/icons/powerpoint.png`, emoji: "📑" },
+  { name: "Google Sheets",   icon: `${GITHUB}/icons/gsheets.png`,    emoji: "📋" },
+  { name: "Power Query",     icon: "",                               emoji: "⚙️" },
+  { name: "MS Access",       icon: `${GITHUB}/icons/access.png`,     emoji: "🧮" },
+  { name: "DAX",             icon: "",                               emoji: "📐" },
+  { name: "Zebra BI",        icon: `${GITHUB}/icons/zebrabi.png`,    emoji: "🦓" },
+];
+
+/* ── 7. PROJECTS ─────────────────────────────────────────────── */
+// Each project:
+//   featured → true = wide card (spans 2 columns)
+//   image    → screenshot path in assets/images/projects/
+//              Leave "" to show the emoji fallback instead
+//   link     → URL opened when clicking "View Project"
+//              Leave "" to hide the button
+//   gradBg   → gradient shown as image background / fallback
+//
+// ✏️ TO ADD A NEW PROJECT — copy the template at the bottom
+const PROJECTS = [
+  {
+    featured: true,
+    cat:      "Power BI · Financial Analytics",
+    title:    "Actual vs Budget Executive Dashboard",
+    desc:     "Real-time financial dashboard enabling executives to compare actual income and expenses against budget across 5 project IDs, with DAX-driven variance metrics, KPI cards, and conditional formatting for instant performance reads.",
+    tags:     ["Power BI", "DAX", "Variance Analysis", "Financial Reporting"],
+    image:    `${GITHUB}/Screenshot 2025-10-13 174243.png`,
+    emoji:    "📊",
+    link:     "", // ✏️ paste your Power BI published link here
+    gradBg:   "linear-gradient(135deg,#EBF4FF 0%,#DBEAFE 100%)",
+  },
+  {
+    featured: false,
+    cat:      "Power BI · Agribusiness",
+    title:    "Simple Farm Investment Dashboard",
+    desc:     "Investor analytics for Bakerverse Farms — ₦52.8M principal, 67 investors, SFI cycle tracking, and cash inflow trends from Jan 2023 to Jan 2025.",
+    tags:     ["Power BI", "Investment Analytics"],
+    image:    `${GITHUB}/images/projects/project-02-sfi.png`,
+    emoji:    "🌿",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%)",
+  },
+  {
+    featured: false,
+    cat:      "Power BI · Healthcare Finance",
+    title:    "St. Thomas' Hospital Finance Dashboard",
+    desc:     "£3M billing analysis with Zebra BI MoM variance charts, insurance vs. out-of-pocket breakdown, and department-level performance slicers.",
+    tags:     ["Power BI", "Zebra BI", "DAX"],
+    image:    `${GITHUB}/images/projects/project-03-hospital.png`,
+    emoji:    "🏥",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#FFF1F2 0%,#FFE4E6 100%)",
+  },
+  {
+    featured: true,
+    cat:      "Power BI · Real Estate Finance",
+    title:    "Baker Homes Finance Dashboard",
+    desc:     "₦662M sales analytics platform with monthly revenue tracking, top client leaderboard, target vs actual comparison, geographic sales mapping across Nigeria, and commission analysis for 18 marketers totalling ₦38.87M.",
+    tags:     ["Power BI", "Real Estate", "Sales Analytics"],
+    image:    `${GITHUB}/images/projects/project-04-baker-homes.png`,
+    emoji:    "🏘️",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%)",
+  },
+  {
+    featured: false,
+    cat:      "Power BI · Retail Analytics",
+    title:    "Adidas US Sales Insight Dashboard",
+    desc:     "$899.9M sales intelligence with retailer performance, geographic breakdown, product analysis, and post-COVID trend recovery visualisation.",
+    tags:     ["Power BI", "Retail", "Trend Analysis"],
+    image:    `${GITHUB}/images/projects/project-05-adidas.png`,
+    emoji:    "👟",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 100%)",
+  },
+  {
+    featured: false,
+    cat:      "Power BI · Public Finance",
+    title:    "FAAC Fund Disbursement 2007–2024",
+    desc:     "₦41.67T fund analysis across 36 states and 770 LGAs with geopolitical zone breakdown, annual trend mapping, and descriptive statistics.",
+    tags:     ["Power BI", "Public Sector", "Government Data"],
+    image:    `${GITHUB}/images/projects/project-06-faac.png`,
+    emoji:    "🏛️",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#F0FDFA 0%,#CCFBF1 100%)",
+  },
+  {
+    featured: false,
+    cat:      "Power BI · Space & Technology",
+    title:    "Space Missions Dashboard 1957–2022",
+    desc:     "370 rockets, 4.63K launches, $35.05M avg rocket cost — visualised across 17 countries and 62 organisations with mission success analytics.",
+    tags:     ["Power BI", "Data Visualization"],
+    image:    `${GITHUB}/images/projects/project-07-space.png`,
+    emoji:    "🚀",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#EBF4FF 0%,#DBEAFE 100%)",
+  },
+  {
+    featured: false,
+    cat:      "Power BI · Agricultural Finance",
+    title:    "Bakerverse Farms Financial Performance",
+    desc:     "₦13.86M gross sales dashboard tracking harvest cycles, average price per crate, market gross vs net sales, and wholesome quantity ratio.",
+    tags:     ["Power BI", "Agribusiness"],
+    image:    `${GITHUB}/images/projects/project-08-farms.png`,
+    emoji:    "🌾",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%)",
+  },
+  {
+    featured: false,
+    cat:      "Strategy · Business Analysis",
+    title:    "BCG Matrix & SWOT Strategic Analysis",
+    desc:     "Multi-subsidiary strategic review: Baker Homes (Star), Bakerverse Suites (Cash Cow), Bakerverse Farms (Question Mark) — informing resource reallocation and expansion roadmap.",
+    tags:     ["Strategy", "BCG Matrix", "SWOT"],
+    image:    `${GITHUB}/images/projects/project-09-bcg.png`,
+    emoji:    "📐",
+    link:     "",
+    gradBg:   "linear-gradient(135deg,#FFFBEB 0%,#FEF3C7 100%)",
+  },
+  /* ── NEW PROJECT TEMPLATE — copy & paste to add more ────────
+  {
+    featured: false,
+    cat:      "Your Category",
+    title:    "Your Project Title",
+    desc:     "Short description of what this project does and what insight it delivers.",
+    tags:     ["Tag 1", "Tag 2"],
+    image:    `${GITHUB}/images/projects/project-10-new.png`,
+    emoji:    "📌",
+    link:     "https://your-project-link.com",
+    gradBg:   "linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 100%)",
+  },
+  ──────────────────────────────────────────────────────────── */
+];
+
+/* ── 8. HIGHLIGHTS BAND ──────────────────────────────────────── */
+const HIGHLIGHTS = [
+  { num: "₦118", suffix: "M",    label: "Expenditure tracked at GTI Capital" },
+  { num: "₦41",  suffix: ".67T", label: "FAAC fund disbursement analysed" },
+  { num: "₦662", suffix: "M",    label: "Baker Homes sales visualised" },
+  { num: "8",    suffix: "+",    label: "Months of backlog records cleared" },
+];
+
+/* ==============================================================
+   RENDER ENGINE — no need to edit below this line
+   ============================================================== */
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;") }
+
+function renderAvatar(){
+  if(!PROFILE.profilePhoto) return `<div class="about-avatar-fallback">${esc(PROFILE.initials)}</div>`;
+  return `<div class="about-avatar"><img src="${esc(PROFILE.profilePhoto)}" alt="${esc(PROFILE.name)}"
+    onerror="this.parentElement.outerHTML='<div class=\\'about-avatar-fallback\\'>${esc(PROFILE.initials)}</div>'"></div>`;
+}
+
+function renderCerts(){
+  return CERTS.map(c=>`
+    <div class="cert-card">
+      <div class="cert-icon">${c.icon}</div>
+      <div><div class="cert-name">${esc(c.name)}</div><div class="cert-body">${esc(c.body)}</div></div>
+    </div>`).join('');
+}
+
+function renderExp(){
+  return EXPERIENCE.map((j,i)=>`
+    <div class="exp-item reveal reveal-d${Math.min(i+1,4)}">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">${esc(j.role)}</div>
+          <div class="exp-company">${esc(j.company)}</div>
+        </div>
+        <div class="exp-period${j.current?' exp-current':''}">${esc(j.period)}</div>
+      </div>
+      <p class="exp-desc">${esc(j.desc)}</p>
+      <ul class="exp-bullets">${j.bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+function renderSkillGroup(g){
+  return `<div class="skill-group">
+    <div class="skill-group-label">${esc(g.label)}</div>
+    <div class="skill-rows">${g.items.map(s=>`
+      <div class="skill-row">
+        <div class="skill-row-top">
+          <span class="skill-row-name">${esc(s.name)}</span>
+          <span class="skill-row-val">${s.pct}%</span>
+        </div>
+        <div class="skill-track"><div class="skill-fill" data-width="${s.pct}"></div></div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+function renderTools(){
+  return TOOLS.map(t=>{
+    const icon = t.icon
+      ? `<img class="tool-icon-img" src="${esc(t.icon)}" alt="${esc(t.name)}"
+             onerror="this.outerHTML='<span class=\\'tool-icon-emoji\\'>${t.emoji}</span>'">`
+      : `<span class="tool-icon-emoji">${t.emoji}</span>`;
+    return `<div class="tool-chip">${icon}${esc(t.name)}</div>`;
+  }).join('');
+}
+
+function renderProjects(){
+  return PROJECTS.map((p,i)=>{
+    const img = p.image
+      ? `<img class="project-preview-img" src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy"
+             onerror="this.parentElement.innerHTML='<div class=\\'project-preview-fallback\\'>${p.emoji}</div>'">`
+      : `<div class="project-preview-fallback">${p.emoji}</div>`;
+
+    const overlayBtn = p.link
+      ? `<a class="project-overlay-btn" href="${esc(p.link)}" target="_blank" rel="noopener">View Project ↗</a>`
+      : `<span class="project-overlay-btn">Preview</span>`;
+
+    const linkBadge = p.link
+      ? `<a class="project-link-badge" href="${esc(p.link)}" target="_blank" rel="noopener">View project ↗</a>`
+      : '';
+
+    return `
+      <div class="project-card${p.featured?' featured':''} reveal reveal-d${(i%3)+1}">
+        <div class="project-preview" style="background:${p.gradBg}">
+          ${img}
+          <div class="project-overlay">${overlayBtn}</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">${esc(p.cat)}</div>
+          <div class="project-title">${esc(p.title)}</div>
+          <div class="project-desc">${esc(p.desc)}</div>
+          <div class="project-footer">
+            <div class="project-tags">${p.tags.map(t=>`<span class="project-tag">${esc(t)}</span>`).join('')}</div>
+            ${linkBadge}
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderHighlights(){
+  return HIGHLIGHTS.map(h=>`
+    <div class="hl-item">
+      <div class="hl-num">${esc(h.num)}<span>${esc(h.suffix)}</span></div>
+      <div class="hl-label">${esc(h.label)}</div>
+    </div>`).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Profile card
+  document.getElementById('profileAvatar').innerHTML  = renderAvatar();
+  document.getElementById('profileName').textContent  = PROFILE.name;
+  document.getElementById('profileRole').textContent  = PROFILE.role;
+  document.getElementById('profileLoc').textContent   = PROFILE.location;
+  document.getElementById('profilePills').innerHTML   = PROFILE.pills.map(p=>`<span class="about-pill">${esc(p)}</span>`).join('');
+  document.getElementById('profileEmail').href        = `mailto:${PROFILE.email}`;
+  document.getElementById('profileLinkedin').href     = PROFILE.linkedin;
+  document.getElementById('profilePhone').href        = `tel:${PROFILE.phone}`;
+
+  // Bio
+  const bioEl = document.getElementById('bioParagraphs');
+  bioEl.innerHTML = PROFILE.bio.map(p=>`<p class="about-text">${p}</p>`).join('');
+
+  // Contact info
+  document.getElementById('ciEmail').querySelector('a').href        = `mailto:${PROFILE.email}`;
+  document.getElementById('ciEmail').querySelector('a').textContent = PROFILE.email;
+  document.getElementById('ciPhone').querySelector('a').href        = `tel:${PROFILE.phone}`;
+  document.getElementById('ciPhone').querySelector('a').textContent = PROFILE.phone;
+  document.getElementById('ciLinkedin').querySelector('a').href     = PROFILE.linkedin;
+  document.getElementById('footerEmail').href    = `mailto:${PROFILE.email}`;
+  document.getElementById('footerLinkedin').href = PROFILE.linkedin;
+
+  // Certs
+  document.getElementById('certsGrid').innerHTML = renderCerts();
+
+  // Experience
+  document.getElementById('expList').innerHTML = renderExp();
+
+  // Skills
+  document.getElementById('skillsLeft').innerHTML  = renderSkillGroup(SKILLS.left);
+  document.getElementById('skillsRight').innerHTML = renderSkillGroup(SKILLS.right);
+
+  // Tools
+  document.getElementById('toolsChips').innerHTML = renderTools();
+
+  // Projects
+  document.getElementById('projectsGrid').innerHTML = renderProjects();
+
+  // Highlights
+  document.getElementById('highlightsBand').innerHTML = renderHighlights();
+
+  // Scroll reveal
+  const revealObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible') });
+  },{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(r=>revealObs.observe(r));
+
+  // Skill bars
+  const skillObs = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.querySelectorAll('.skill-fill').forEach((f,i)=>{
+          setTimeout(()=>{ f.style.width=f.dataset.width+'%' }, i*80);
+        });
+        skillObs.unobserve(entry.target);
+      }
+    });
+  },{threshold:0.3});
+  document.querySelectorAll('.skills-layout').forEach(el=>skillObs.observe(el));
+
+  // Active nav
+  const navAs = document.querySelectorAll('.nav-links a');
+  const secs  = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll',()=>{
+    let cur='';
+    secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-80) cur=s.id });
+    navAs.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
+  },{passive:true});
+
+  // Hero stat fade-in
+  document.querySelectorAll('.hero-stat-num').forEach(el=>{
+    el.style.opacity='0'; el.style.transform='translateY(10px)';
+    el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+  });
+  window.addEventListener('load',()=>{
+    document.querySelectorAll('.hero-stat-num').forEach((el,i)=>{
+      setTimeout(()=>{ el.style.opacity='1'; el.style.transform='none'; }, 800+i*100);
+    });
+  });
+});
+
+function toggleDrawer(){
+  document.getElementById('mobileDrawer').classList.toggle('open');
+}
+document.addEventListener('click',e=>{
+  const d=document.getElementById('mobileDrawer'), h=document.getElementById('hamburger');
+  if(d&&h&&!d.contains(e.target)&&!h.contains(e.target)) d.classList.remove('open');
+});
+
+function handleSubmit(){
+  const btn=document.getElementById('submitBtn');
+  btn.textContent='Message Sent ✓'; btn.style.background='#34C759'; btn.disabled=true;
+  setTimeout(()=>{ btn.textContent='Send Another →'; btn.style.background=''; btn.disabled=false; },4000);
+}
+</script>
+
+<!-- ============================================================
+     HTML SHELL
+     ============================================================ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Jamiu<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:adeyemojamiu30@gmail.com" class="nav-cta">Hire Me</a>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="#about"      onclick="toggleDrawer()">About</a>
+  <a href="#experience" onclick="toggleDrawer()">Experience</a>
+  <a href="#skills"     onclick="toggleDrawer()">Skills</a>
+  <a href="#projects"   onclick="toggleDrawer()">Projects</a>
+  <a href="#contact"    onclick="toggleDrawer()">Contact</a>
+  <a href="mailto:adeyemojamiu30@gmail.com" style="color:var(--blue);font-weight:600;">Hire Me →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-ambient">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+  <div class="hero-badge"><span class="badge-dot"></span>Available for opportunities · Data Analytics &amp; Finance</div>
+  <h1 class="hero-title">Finance meets<br><span class="accent">Business Intelligence</span></h1>
+  <p class="hero-sub">Accountant, Business Intelligence Analyst &amp; Data Strategist.<br>Turning complex financials into clarity — one dashboard at a time.</p>
+  <div class="hero-actions">
+    <a href="#projects" class="btn-primary">View Projects</a>
+    <a href="#contact"  class="btn-secondary">Get In Touch</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">3<span>+</span></div><div class="hero-stat-label">Years of Experience</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">10<span>+</span></div><div class="hero-stat-label">Projects Delivered</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">₦118<span>M+</span></div><div class="hero-stat-label">Financial Data Managed</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">100<span>%</span></div><div class="hero-stat-label">Statutory Compliance</div></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-card">
+          <div id="profileAvatar"></div>
+          <div class="about-name"   id="profileName"></div>
+          <div class="about-role"   id="profileRole"></div>
+          <div class="about-location">📍 <span id="profileLoc"></span></div>
+          <div class="about-pills"  id="profilePills"></div>
+          <div class="about-connect">
+            <a id="profileEmail"    class="about-link">✉ Email</a>
+            <a id="profileLinkedin" class="about-link" target="_blank" rel="noopener">in LinkedIn</a>
+            <a id="profilePhone"    class="about-link">☎ Call</a>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="section-eyebrow">About Me</div>
+        <h2 class="section-title">The Person<br><span class="light">Behind the Numbers</span></h2>
+        <div id="bioParagraphs"></div>
+        <div class="certs-grid" id="certsGrid"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Work Experience</div>
+      <h2 class="section-title">Career <span class="light">Journey</span></h2>
+      <p class="section-desc">A track record of financial clarity, operational intelligence, and data-driven insights across capital markets, real estate, and public sector economics.</p>
+    </div>
+    <div class="exp-list" id="expList"></div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS BAND -->
+<div class="highlights-band">
+  <div class="highlights-inner" id="highlightsBand"></div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Skills &amp; Expertise</div>
+      <h2 class="section-title">Technical <span class="light">Proficiency</span></h2>
+      <p class="section-desc">A blend of financial expertise and analytical tooling — from DAX measures in Power BI to MySQL queries and structured financial modelling.</p>
+    </div>
+    <div class="skills-layout reveal reveal-d1">
+      <div id="skillsLeft"></div>
+      <div id="skillsRight"></div>
+    </div>
+    <div class="tools-wall reveal reveal-d2">
+      <div class="tools-wall-title">Technology Stack</div>
+      <div class="tools-chips" id="toolsChips"></div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="projects-header reveal">
+      <div>
+        <div class="section-eyebrow">Featured Projects</div>
+        <h2 class="section-title">Intelligence<br><span class="light">In Action</span></h2>
+      </div>
+      <p style="font-size:0.92rem;color:var(--gray-darker);max-width:300px;line-height:1.65;">
+        Dashboards, analyses &amp; BI solutions across finance, real estate, healthcare, agriculture, and public sector.
+      </p>
+    </div>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:64px;">
+      <div class="section-eyebrow">Contact</div>
+      <h2 class="section-title" style="max-width:600px;margin:0 auto 16px;">Let's Build<br><span class="light">Something Together</span></h2>
+      <p class="section-desc" style="margin:0 auto;text-align:center;">Open to roles in finance, BI, and data analytics. Based in Lagos — available for remote and on-site engagements.</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-info reveal">
+        <div class="contact-info-item" id="ciEmail">
+          <div class="cii-icon">✉️</div>
+          <div><div class="cii-label">Email</div><div class="cii-value"><a href="#">—</a></div></div>
+        </div>
+        <div class="contact-info-item" id="ciPhone">
+          <div class="cii-icon">📱</div>
+          <div><div class="cii-label">Phone</div><div class="cii-value"><a href="#">—</a></div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="cii-icon">📍</div>
+          <div><div class="cii-label">Location</div><div class="cii-value">Lagos, Nigeria</div></div>
+        </div>
+        <div class="contact-info-item" id="ciLinkedin">
+          <div class="cii-icon">💼</div>
+          <div><div class="cii-label">LinkedIn</div><div class="cii-value"><a href="#" target="_blank">adeyemo-jamiu-210605251</a></div></div>
+        </div>
+        <div class="contact-info-item">
+          <div class="cii-icon">🏢</div>
+          <div><div class="cii-label">Current Role</div><div class="cii-value">Finance Officer — GTI Capital Limited</div></div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-d2">
+        <div class="form-title">Send a Message</div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="John" /></div>
+          <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Doe" /></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="john@company.com" /></div>
+        <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="Project / Opportunity / Collaboration" /></div>
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea></div>
+        <button class="form-submit" id="submitBtn" onclick="handleSubmit()">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Jamiu<span>.</span></div>
+  <div class="footer-copy">© 2026 Adeyemo Jamiu Adewale · All Rights Reserved</div>
+  <div class="footer-links">
+    <a id="footerEmail"    href="#">Email</a>
+    <a id="footerLinkedin" href="#" target="_blank">LinkedIn</a>
+    <a href="#home">Back to Top ↑</a>
+  </div>
+</footer>
+</body>
+</html>
