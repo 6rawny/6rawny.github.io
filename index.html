@@ -250,6 +250,11 @@ section{padding:120px 48px}
 .hl-label{font-size:0.82rem;color:rgba(255,255,255,0.45);font-weight:400}
  
 /* CONTACT */
+  <!-- Calendly link widget begin -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/adeyemojamiu30/30min'});return false;">Schedule time with me</a>
+<!-- Calendly link widget end -->
   
 #contact{background:var(--gray-soft)}
 .contact-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start;margin-top:64px}
@@ -473,24 +478,13 @@ const PROJECTS = [
     link:     "https://app.powerbi.com/links/_ZX1ZJCq3T?ctid=13295da2-8580-4e37-88bd-4aece51c7502&pbi_source=linkShare",
     gradBg:   "linear-gradient(135deg,#EBF4FF 0%,#DBEAFE 100%)",
   },
-    {
-    featured: false,
-    cat:      "Google Sheet · Banking",
-    title:    "KPI System",
-    desc:     "Investor analytics for Agricbusiness - ₦52.8M principal, 67 investors, SFI cycle tracking, and cash inflow trends from Jan 2023 to Jan 2025.",
-    tags:     ["Power BI", "Investment Analytics"],
-    image:    `${GITHUB}/images/project-02.png`,
-    emoji:    "🌿",
-    link:     "https://docs.google.com/spreadsheets/d/17RQrx9ruLDyaWBs4FCXx5M9d9hVDyrkvNoJxZdYMFZE/edit?usp=sharing",
-    gradBg:   "linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%)",
-  },
   {
     featured: false,
     cat:      "Power BI · Agribusiness",
-    title:    "Key Performance Indicator System",
-    desc:     "The system centralizes KPI data collection, automatically calculates performance scores, applies weighted evaluation logic, distinguishes between standard and risk based KPIs, generates ratings and status flags, and provides management dashboards and analytical insights for decision making.",
-    tags:     ["Google Sheet", "App Script", "Key Performance Indicator Tracker"],
-    image:    `${GITHUB}/images/project-x.png`,
+    title:    "Simple Farm Investment Dashboard",
+    desc:     "Investor analytics for Agricbusiness - ₦52.8M principal, 67 investors, SFI cycle tracking, and cash inflow trends from Jan 2023 to Jan 2025.",
+    tags:     ["Power BI", "Investment Analytics"],
+    image:    `${GITHUB}/images/project-02.png`,
     emoji:    "🌿",
     link:     "",
     gradBg:   "linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%)",
@@ -890,19 +884,19 @@ function handleSubmit(){
           <div><div class="cii-label">Email</div><div class="cii-value"><a href="#">-</a></div></div>
         </div>
         <div class="contact-info-item" id="ciPhone">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">📱</div>
           <div><div class="cii-label">Phone</div><div class="cii-value"><a href="#">-</a></div></div>
         </div>
         <div class="contact-info-item">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">📍</div>
           <div><div class="cii-label">Location</div><div class="cii-value">Lagos, Nigeria</div></div>
         </div>
         <div class="contact-info-item" id="ciLinkedin">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">💼</div>
           <div><div class="cii-label">LinkedIn</div><div class="cii-value"><a href="#" target="_blank">adeyemo-jamiu-210605251</a></div></div>
         </div>
         <div class="contact-info-item">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">🏢</div>
           <div><div class="cii-label">Current Role</div><div class="cii-value">Finance Officer - GTI Capital Limited</div></div>
         </div>
       </div>
