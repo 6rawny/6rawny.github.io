@@ -35,7 +35,7 @@ body{background:var(--white);color:var(--black);font-family:var(--font);font-wei
 a{text-decoration:none;color:inherit}
 button{font-family:var(--font);cursor:pointer}
 ::-webkit-scrollbar{width:0}
- 
+
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;
   justify-content:space-between;padding:0 48px;height:52px;
@@ -63,7 +63,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
   border-bottom:0.5px solid var(--gray-mid);transition:color 0.2s}
 .mobile-drawer a:last-child{border-bottom:none}
 .mobile-drawer a:hover{color:var(--blue)}
- 
+
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding:120px 24px 80px;
@@ -102,7 +102,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
   color:var(--black-deep);line-height:1;margin-bottom:6px}
 .hero-stat-num span{color:var(--blue)}
 .hero-stat-label{font-size:0.8rem;color:var(--gray-darker);font-weight:400}
- 
+
 /* SECTIONS */
 section{padding:120px 48px}
 .section-inner{max-width:1100px;margin:0 auto}
@@ -112,7 +112,7 @@ section{padding:120px 48px}
 .section-title .light{font-weight:300}
 .section-desc{font-size:1.05rem;color:var(--gray-darker);max-width:560px;line-height:1.7;font-weight:400;letter-spacing:-0.005em}
 .section-divider{width:100%;height:0.5px;background:var(--gray-mid)}
- 
+
 /* ABOUT */
 #about{background:var(--gray-soft)}
 .about-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:80px;align-items:center}
@@ -152,7 +152,7 @@ section{padding:120px 48px}
   display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0}
 .cert-name{font-size:0.78rem;font-weight:600;color:var(--black);line-height:1.3}
 .cert-body{font-size:0.68rem;color:var(--gray-darker);margin-top:2px}
- 
+
 /* EXPERIENCE */
 #experience{background:var(--white)}
 .exp-list{display:flex;flex-direction:column;gap:16px;margin-top:64px}
@@ -173,7 +173,7 @@ section{padding:120px 48px}
 .exp-bullets{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;list-style:none}
 .exp-bullets li{font-size:0.85rem;color:var(--gray-darker);padding-left:16px;position:relative;line-height:1.5}
 .exp-bullets li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
- 
+
 /* SKILLS */
 #skills{background:var(--gray-soft)}
 .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:64px}
@@ -199,20 +199,18 @@ section{padding:120px 48px}
 .tool-chip:hover .tool-icon-img{filter:brightness(0) invert(1)}
 .tool-icon-img{width:18px;height:18px;object-fit:contain;transition:filter 0.2s;flex-shrink:0}
 .tool-icon-emoji{font-size:1rem;line-height:1}
- 
+
 /* PROJECTS */
 #projects{background:var(--white)}
 .projects-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:64px;flex-wrap:wrap}
 .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
- 
-/* Project card: border-radius reduced 70% from 40px to 12px */
+
 .project-card{background:var(--gray-soft);border:0.5px solid var(--gray-mid);border-radius:12px;
   overflow:hidden;transition:transform 0.3s var(--ease),box-shadow 0.3s var(--ease);
   position:relative;cursor:pointer;display:flex;flex-direction:column}
 .project-card:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,0.1)}
 .project-card.featured{grid-column:span 2}
- 
-/* Preview image area: top corners match card */
+
 .project-preview{position:relative;overflow:hidden;height:200px;border-radius:12px 12px 0 0}
 .project-card.featured .project-preview{height:260px}
 .project-preview-img{width:100%;height:100%;object-fit:cover;display:block;
@@ -239,7 +237,7 @@ section{padding:120px 48px}
   padding:4px 10px;font-size:0.7rem;font-weight:500;color:var(--gray-darker)}
 .project-link-badge{display:flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:600;color:var(--blue)}
 .project-link-badge:hover{opacity:0.7}
- 
+
 /* HIGHLIGHTS BAND */
 .highlights-band{background:var(--black-deep);padding:80px 48px}
 .highlights-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
@@ -248,7 +246,7 @@ section{padding:120px 48px}
 .hl-num{font-size:clamp(2.4rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.05em;color:#fff;margin-bottom:8px;line-height:1}
 .hl-num span{color:var(--blue)}
 .hl-label{font-size:0.82rem;color:rgba(255,255,255,0.45);font-weight:400}
- 
+
 /* CONTACT */
 #contact{background:var(--gray-soft)}
 .contact-wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:start;margin-top:64px}
@@ -279,8 +277,10 @@ section{padding:120px 48px}
   padding:15px;border:none;border-radius:980px;letter-spacing:-0.01em;
   transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
   box-shadow:0 2px 12px rgba(0,113,227,0.3);margin-top:8px}
-.form-submit:hover{background:var(--blue-hover);transform:scale(1.01);box-shadow:0 4px 20px rgba(0,113,227,0.4)}
- 
+.form-submit:hover:not(:disabled){background:var(--blue-hover);transform:scale(1.01);box-shadow:0 4px 20px rgba(0,113,227,0.4)}
+.form-submit:disabled{opacity:0.75;cursor:not-allowed;transform:none}
+.form-notice{font-size:0.78rem;color:var(--gray-darker);text-align:center;margin-top:10px;min-height:20px}
+
 /* FOOTER */
 footer{background:var(--black-deep);padding:48px;display:flex;align-items:center;
   justify-content:space-between;flex-wrap:wrap;gap:20px}
@@ -290,14 +290,14 @@ footer{background:var(--black-deep);padding:48px;display:flex;align-items:center
 .footer-links{display:flex;gap:24px}
 .footer-links a{font-size:0.78rem;color:rgba(255,255,255,0.4);transition:color 0.2s}
 .footer-links a:hover{color:#fff}
- 
+
 /* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 .reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}
 .reveal-d3{transition-delay:0.3s}.reveal-d4{transition-delay:0.4s}
- 
+
 /* RESPONSIVE */
 @media(max-width:960px){
   nav{padding:0 24px}.nav-links{display:none}.nav-hamburger{display:flex}
@@ -325,10 +325,10 @@ footer{background:var(--black-deep);padding:48px;display:flex;align-items:center
 </style>
 </head>
 <body>
- 
+
 <script>
 const GITHUB = "https://raw.githubusercontent.com/6rawny/6rawny.github.io/main/assets";
- 
+
 const PROFILE = {
   name:     "Adeyemo Jamiu Adewale",
   role:     "Accountant & Data Analyst",
@@ -356,21 +356,21 @@ const PROFILE = {
     MySQL, AAT, CFI Business Intelligence, and Financial Statement Analysis.`,
   ],
 };
- 
+
 const CERTS = [
-  { icon: "●", name: "ACA (In View)- Professional Level",   body: "ICAN" },
+  { icon: "●", name: "ACA (In View) Professional Level",   body: "ICAN" },
   { icon: "●", name: "Power BI Advanced",                   body: "The Developer" },
   { icon: "●", name: "MySQL for Analytics",                 body: "Coursera" },
   { icon: "●", name: "Financial Statement Analysis",        body: "CFI" },
   { icon: "●", name: "Business Intelligence",               body: "CFI" },
   { icon: "●", name: "AAT",                                 body: "ATSWA" },
 ];
- 
+
 const EXPERIENCE = [
   {
     role:    "Finance Officer",
     company: "GTI Capital Limited - Lagos, Nigeria",
-    period:  "June 2025 – Present",
+    period:  "June 2025 - Present",
     current: true,
     desc:    "Leading full-cycle financial operations for a capital markets firm, from management reporting and statutory compliance to treasury oversight and Business Analytics.",
     bullets: [
@@ -387,7 +387,7 @@ const EXPERIENCE = [
   {
     role:    "Business Analyst / Accountant",
     company: "Baker Industries Limited - Nigeria",
-    period:  "March 2022 – May 2025",
+    period:  "March 2022 - May 2025",
     current: false,
     desc:    "Dual role combining financial accounting with business intelligence - designing dashboards, building KPI frameworks, and conducting strategic analysis across real estate, agriculture, and hospitality subsidiaries.",
     bullets: [
@@ -404,9 +404,9 @@ const EXPERIENCE = [
   {
     role:    "NYSC Intern - Economic Planning",
     company: "Ministry of Economic Planning & Budget - Nigeria",
-    period:  "Sep 2022 – Oct 2023",
+    period:  "Sep 2022 - Oct 2023",
     current: false,
-    desc:    "Contributed to public sector economic planning, budget framework analysis, and policy evaluation - supporting data-driven decision making at the state government level.",
+    desc:    "Contributed to public sector economic planning, budget framework analysis, and policy evaluation, supporting data-driven decision making at the state government level.",
     bullets: [
       "Conduct in-depth research on economic policies, development strategies, and budget frameworks to support government planning initiatives.",
       "Analyze economic data and budgetary allocations to evaluate the effectiveness of public sector programs and policies.",
@@ -419,7 +419,7 @@ const EXPERIENCE = [
     ],
   },
 ];
- 
+
 const SKILLS = {
   left: {
     label: "Finance & Accounting",
@@ -442,7 +442,7 @@ const SKILLS = {
     ],
   },
 };
- 
+
 const TOOLS = [
   { name: "Power BI",        icon: `${GITHUB}/icons/powerbi.png`,    emoji: "📊" },
   { name: "MySQL",           icon: `${GITHUB}/icons/mysql.png`,      emoji: "🗃️" },
@@ -459,7 +459,7 @@ const TOOLS = [
   { name: "MS Access",       icon: `${GITHUB}/icons/access.png`,     emoji: "🧮" },
   { name: "Power Apps",      icon: `${GITHUB}/icons/power.png`,      emoji: "📐" },
 ];
- 
+
 const PROJECTS = [
   {
     featured: true,
@@ -476,14 +476,14 @@ const PROJECTS = [
     featured: false,
     cat:      "Power BI · Agribusiness",
     title:    "Simple Farm Investment Dashboard",
-    desc:     "Investor analytics for Agricbusiness - ₦52.8M principal, 67 investors, SFI cycle tracking, and cash inflow trends from Jan 2023 to Jan 2025.",
+    desc:     "Investor analytics for Agricbusiness - N52.8M principal, 67 investors, SFI cycle tracking, and cash inflow trends from Jan 2023 to Jan 2025.",
     tags:     ["Power BI", "Investment Analytics"],
     image:    `${GITHUB}/images/project-02.png`,
     emoji:    "🌿",
     link:     "",
     gradBg:   "linear-gradient(135deg,#ECFDF5 0%,#D1FAE5 100%)",
   },
-    {
+  {
     featured: true,
     cat:      "Google Sheet · Bank KPI System",
     title:    "Key Performance Indicator Tracker",
@@ -498,7 +498,7 @@ const PROJECTS = [
     featured: false,
     cat:      "Power BI · Healthcare Finance",
     title:    "St. Thomas' Hospital Finance Dashboard",
-    desc:     "£3M billing analysis with Zebra BI MoM variance charts, insurance vs. out-of-pocket breakdown, and department-level performance slicers.",
+    desc:     "3M billing analysis with Zebra BI MoM variance charts, insurance vs. out-of-pocket breakdown, and department-level performance slicers.",
     tags:     ["Power BI", "Zebra BI", "DAX"],
     image:    `${GITHUB}/images/project-03.png`,
     emoji:    "🏥",
@@ -509,7 +509,7 @@ const PROJECTS = [
     featured: true,
     cat:      "Power BI · Real Estate Finance",
     title:    "Finance Dashboard",
-    desc:     "Sales analytics platform with monthly revenue tracking, top client leaderboard, target vs actual comparison, geographic sales mapping across Nigeria, and commission analysis for 18 marketers totalling ₦38.87M.",
+    desc:     "Sales analytics platform with monthly revenue tracking, top client leaderboard, target vs actual comparison, geographic sales mapping across Nigeria, and commission analysis for 18 marketers totalling N38.87M.",
     tags:     ["Power BI", "Real Estate", "Sales Analytics"],
     image:    `${GITHUB}/images/project-04.png`,
     emoji:    "🏘️",
@@ -530,8 +530,8 @@ const PROJECTS = [
   {
     featured: false,
     cat:      "Power BI · Public Finance",
-    title:    "FAAC Fund Disbursement 2007–2024",
-    desc:     "₦41.67T fund analysis across 36 states and 770 LGAs with geopolitical zone breakdown, annual trend mapping, and descriptive statistics.",
+    title:    "FAAC Fund Disbursement 2007-2024",
+    desc:     "N41.67T fund analysis across 36 states and 770 LGAs with geopolitical zone breakdown, annual trend mapping, and descriptive statistics.",
     tags:     ["Power BI", "Public Sector", "Government Data"],
     image:    `${GITHUB}/images/project-06.png`,
     emoji:    "🏛️",
@@ -541,45 +541,32 @@ const PROJECTS = [
   {
     featured: false,
     cat:      "Power BI · Space & Technology",
-    title:    "Space Missions Dashboard 1957–2022",
-    desc:     "370 rockets, 4.63K launches, $35.05M avg rocket cost - visualised across 17 countries and 62 organisations with mission success analytics.",
+    title:    "Space Missions Dashboard 1957-2022",
+    desc:     "370 rockets, 4.63K launches, $35.05M avg rocket cost, visualised across 17 countries and 62 organisations with mission success analytics.",
     tags:     ["Power BI", "Data Visualization"],
     image:    `${GITHUB}/images/project-07.png`,
     emoji:    "🚀",
     link:     "",
     gradBg:   "linear-gradient(135deg,#EBF4FF 0%,#DBEAFE 100%)",
   },
-  /* ── NEW PROJECT TEMPLATE - copy & paste to add more ────────
-  {
-    featured: false,
-    cat:      "Your Category",
-    title:    "Your Project Title",
-    desc:     "Short description of what this project does and what insight it delivers.",
-    tags:     ["Tag 1", "Tag 2"],
-    image:    `${GITHUB}/images/projects/project-10-new.png`,
-    emoji:    "📌",
-    link:     "https://your-project-link.com",
-    gradBg:   "linear-gradient(135deg,#F5F3FF 0%,#EDE9FE 100%)",
-  },
-  ──────────────────────────────────────────────────────────── */
 ];
- 
+
 const HIGHLIGHTS = [
-  { num: "₦800", suffix: "M",    label: "Cashflow tracked" },
-  { num: "₦41",  suffix: "T", label: "FAAC fund disbursement analysed" },
-  { num: "₦2", suffix: "B+",    label: "Sales volume visualised" },
+  { num: "N800", suffix: "M",    label: "Cashflow tracked" },
+  { num: "N41",  suffix: "T",    label: "FAAC fund disbursement analysed" },
+  { num: "N2",   suffix: "B+",   label: "Sales volume visualised" },
   { num: "8",    suffix: "+",    label: "Months of backlog records cleared" },
 ];
- 
+
 /* RENDER ENGINE */
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;") }
- 
+
 function renderAvatar(){
   if(!PROFILE.profilePhoto) return `<div class="about-avatar-fallback">${esc(PROFILE.initials)}</div>`;
   return `<div class="about-avatar"><img src="${esc(PROFILE.profilePhoto)}" alt="${esc(PROFILE.name)}"
     onerror="this.parentElement.outerHTML='<div class=\\'about-avatar-fallback\\'>${esc(PROFILE.initials)}</div>'"></div>`;
 }
- 
+
 function renderCerts(){
   return CERTS.map(c=>`
     <div class="cert-card">
@@ -587,7 +574,7 @@ function renderCerts(){
       <div><div class="cert-name">${esc(c.name)}</div><div class="cert-body">${esc(c.body)}</div></div>
     </div>`).join('');
 }
- 
+
 function renderExp(){
   return EXPERIENCE.map((j,i)=>`
     <div class="exp-item reveal reveal-d${Math.min(i+1,4)}">
@@ -602,7 +589,7 @@ function renderExp(){
       <ul class="exp-bullets">${j.bullets.map(b=>`<li>${esc(b)}</li>`).join('')}</ul>
     </div>`).join('');
 }
- 
+
 function renderSkillGroup(g){
   return `<div class="skill-group">
     <div class="skill-group-label">${esc(g.label)}</div>
@@ -617,7 +604,7 @@ function renderSkillGroup(g){
     </div>
   </div>`;
 }
- 
+
 function renderTools(){
   return TOOLS.map(t=>{
     const icon = t.icon
@@ -627,22 +614,22 @@ function renderTools(){
     return `<div class="tool-chip">${icon}${esc(t.name)}</div>`;
   }).join('');
 }
- 
+
 function renderProjects(){
   return PROJECTS.map((p,i)=>{
     const img = p.image
       ? `<img class="project-preview-img" src="${esc(p.image)}" alt="${esc(p.title)}" loading="lazy"
              onerror="this.parentElement.innerHTML='<div class=\\'project-preview-fallback\\'>${p.emoji}</div>'">`
       : `<div class="project-preview-fallback">${p.emoji}</div>`;
- 
+
     const overlayBtn = p.link
-      ? `<a class="project-overlay-btn" href="${esc(p.link)}" target="_blank" rel="noopener">View Project ↗</a>`
+      ? `<a class="project-overlay-btn" href="${esc(p.link)}" target="_blank" rel="noopener">View Project</a>`
       : `<span class="project-overlay-btn">Preview</span>`;
- 
+
     const linkBadge = p.link
-      ? `<a class="project-link-badge" href="${esc(p.link)}" target="_blank" rel="noopener">View project ↗</a>`
+      ? `<a class="project-link-badge" href="${esc(p.link)}" target="_blank" rel="noopener">View project</a>`
       : '';
- 
+
     return `
       <div class="project-card${p.featured?' featured':''} reveal reveal-d${(i%3)+1}">
         <div class="project-preview" style="background:${p.gradBg}">
@@ -661,7 +648,7 @@ function renderProjects(){
       </div>`;
   }).join('');
 }
- 
+
 function renderHighlights(){
   return HIGHLIGHTS.map(h=>`
     <div class="hl-item">
@@ -669,7 +656,7 @@ function renderHighlights(){
       <div class="hl-label">${esc(h.label)}</div>
     </div>`).join('');
 }
- 
+
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('profileAvatar').innerHTML  = renderAvatar();
   document.getElementById('profileName').textContent  = PROFILE.name;
@@ -679,10 +666,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('profileEmail').href        = `mailto:${PROFILE.email}`;
   document.getElementById('profileLinkedin').href     = PROFILE.linkedin;
   document.getElementById('profilePhone').href        = `tel:${PROFILE.phone}`;
- 
+
   const bioEl = document.getElementById('bioParagraphs');
   bioEl.innerHTML = PROFILE.bio.map(p=>`<p class="about-text">${p}</p>`).join('');
- 
+
   document.getElementById('ciEmail').querySelector('a').href        = `mailto:${PROFILE.email}`;
   document.getElementById('ciEmail').querySelector('a').textContent = PROFILE.email;
   document.getElementById('ciPhone').querySelector('a').href        = `tel:${PROFILE.phone}`;
@@ -690,7 +677,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('ciLinkedin').querySelector('a').href     = PROFILE.linkedin;
   document.getElementById('footerEmail').href    = `mailto:${PROFILE.email}`;
   document.getElementById('footerLinkedin').href = PROFILE.linkedin;
- 
+
   document.getElementById('certsGrid').innerHTML    = renderCerts();
   document.getElementById('expList').innerHTML      = renderExp();
   document.getElementById('skillsLeft').innerHTML   = renderSkillGroup(SKILLS.left);
@@ -698,12 +685,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('toolsChips').innerHTML   = renderTools();
   document.getElementById('projectsGrid').innerHTML = renderProjects();
   document.getElementById('highlightsBand').innerHTML = renderHighlights();
- 
+
   const revealObs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible') });
   },{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(r=>revealObs.observe(r));
- 
+
   const skillObs = new IntersectionObserver(entries=>{
     entries.forEach(entry=>{
       if(entry.isIntersecting){
@@ -715,7 +702,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   },{threshold:0.3});
   document.querySelectorAll('.skills-layout').forEach(el=>skillObs.observe(el));
- 
+
   const navAs = document.querySelectorAll('.nav-links a');
   const secs  = document.querySelectorAll('section[id]');
   window.addEventListener('scroll',()=>{
@@ -723,7 +710,7 @@ document.addEventListener('DOMContentLoaded', () => {
     secs.forEach(s=>{ if(window.scrollY>=s.offsetTop-80) cur=s.id });
     navAs.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+cur));
   },{passive:true});
- 
+
   document.querySelectorAll('.hero-stat-num').forEach(el=>{
     el.style.opacity='0'; el.style.transform='translateY(10px)';
     el.style.transition='opacity 0.5s ease, transform 0.5s ease';
@@ -734,7 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
- 
+
 function toggleDrawer(){
   document.getElementById('mobileDrawer').classList.toggle('open');
 }
@@ -742,14 +729,58 @@ document.addEventListener('click',e=>{
   const d=document.getElementById('mobileDrawer'), h=document.getElementById('hamburger');
   if(d&&h&&!d.contains(e.target)&&!h.contains(e.target)) d.classList.remove('open');
 });
- 
-function handleSubmit(){
-  const btn=document.getElementById('submitBtn');
-  btn.textContent='Message Sent ✓'; btn.style.background='#34C759'; btn.disabled=true;
-  setTimeout(()=>{ btn.textContent='Send Another →'; btn.style.background=''; btn.disabled=false; },4000);
+
+async function handleSubmit(e) {
+  e.preventDefault();
+
+  const btn     = document.getElementById('submitBtn');
+  const notice  = document.getElementById('formNotice');
+  const form    = document.getElementById('contactForm');
+  const data    = new FormData(form);
+
+  btn.textContent = 'Sending...';
+  btn.disabled    = true;
+  notice.textContent = '';
+  notice.style.color = '';
+
+  try {
+    const res = await fetch('https://formspree.io/f/xnjywqez', {
+      method:  'POST',
+      body:    data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (res.ok) {
+      btn.textContent        = 'Message Sent';
+      btn.style.background   = '#34C759';
+      notice.textContent     = 'Thank you! Your message has been received and I will get back to you shortly.';
+      notice.style.color     = '#34C759';
+      form.reset();
+      setTimeout(() => {
+        btn.textContent      = 'Send Message';
+        btn.style.background = '';
+        btn.disabled         = false;
+        notice.textContent   = '';
+      }, 6000);
+    } else {
+      const json = await res.json().catch(() => ({}));
+      throw new Error(json.error || 'Submission failed');
+    }
+  } catch (err) {
+    btn.textContent        = 'Failed - Try Again';
+    btn.style.background   = '#FF3B30';
+    notice.textContent     = 'Something went wrong. Please try again or email me directly at adeyemojamiu30@gmail.com';
+    notice.style.color     = '#FF3B30';
+    btn.disabled           = false;
+    setTimeout(() => {
+      btn.textContent      = 'Send Message';
+      btn.style.background = '';
+      notice.textContent   = '';
+    }, 6000);
+  }
 }
 </script>
- 
+
 <nav id="navbar">
   <a href="#" class="nav-logo">Jamiu<span>.</span></a>
   <ul class="nav-links">
@@ -764,16 +795,16 @@ function handleSubmit(){
     <span></span><span></span><span></span>
   </div>
 </nav>
- 
+
 <div class="mobile-drawer" id="mobileDrawer">
   <a href="#about"      onclick="toggleDrawer()">About</a>
   <a href="#experience" onclick="toggleDrawer()">Experience</a>
   <a href="#skills"     onclick="toggleDrawer()">Skills</a>
   <a href="#projects"   onclick="toggleDrawer()">Projects</a>
   <a href="#contact"    onclick="toggleDrawer()">Contact</a>
-  <a href="mailto:adeyemojamiu30@gmail.com" style="color:var(--blue);font-weight:600;">Hire Me →</a>
+  <a href="mailto:adeyemojamiu30@gmail.com" style="color:var(--blue);font-weight:600;">Hire Me</a>
 </div>
- 
+
 <section class="hero" id="home">
   <div class="hero-ambient">
     <div class="blob blob-1"></div>
@@ -789,13 +820,13 @@ function handleSubmit(){
   <div class="hero-stats">
     <div class="hero-stat"><div class="hero-stat-num">4<span>+</span></div><div class="hero-stat-label">Years of Experience</div></div>
     <div class="hero-stat"><div class="hero-stat-num">38<span>+</span></div><div class="hero-stat-label">Projects Delivered</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">₦2<span>B+</span></div><div class="hero-stat-label">Financial Data Managed</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">N2<span>B+</span></div><div class="hero-stat-label">Financial Data Managed</div></div>
     <div class="hero-stat"><div class="hero-stat-num">100<span>%</span></div><div class="hero-stat-label">Statutory Compliance</div></div>
   </div>
 </section>
- 
+
 <div class="section-divider"></div>
- 
+
 <section id="about">
   <div class="section-inner">
     <div class="about-grid">
@@ -807,9 +838,9 @@ function handleSubmit(){
           <div class="about-location"> <span id="profileLoc"></span></div>
           <div class="about-pills"  id="profilePills"></div>
           <div class="about-connect">
-            <a id="profileEmail"    class="about-link">✉ Email</a>
+            <a id="profileEmail"    class="about-link">&#9993; Email</a>
             <a id="profileLinkedin" class="about-link" target="_blank" rel="noopener">in LinkedIn</a>
-            <a id="profilePhone"    class="about-link">☎ Call</a>
+            <a id="profilePhone"    class="about-link">&#9742; Call</a>
           </div>
         </div>
       </div>
@@ -822,9 +853,9 @@ function handleSubmit(){
     </div>
   </div>
 </section>
- 
+
 <div class="section-divider"></div>
- 
+
 <section id="experience">
   <div class="section-inner">
     <div class="reveal">
@@ -835,17 +866,17 @@ function handleSubmit(){
     <div class="exp-list" id="expList"></div>
   </div>
 </section>
- 
+
 <div class="highlights-band">
   <div class="highlights-inner" id="highlightsBand"></div>
 </div>
- 
+
 <section id="skills">
   <div class="section-inner">
     <div class="reveal">
       <div class="section-eyebrow">Skills &amp; Expertise</div>
       <h2 class="section-title">Technical <span class="light">Proficiency</span></h2>
-      <p class="section-desc">A blend of financial expertise and analytical tooling - from DAX measures in Power BI to MySQL queries and structured financial modelling.</p>
+      <p class="section-desc">A blend of financial expertise and analytical tooling, from DAX measures in Power BI to MySQL queries and structured financial modelling.</p>
     </div>
     <div class="skills-layout reveal reveal-d1">
       <div id="skillsLeft"></div>
@@ -857,9 +888,9 @@ function handleSubmit(){
     </div>
   </div>
 </section>
- 
+
 <div class="section-divider"></div>
- 
+
 <section id="projects">
   <div class="section-inner">
     <div class="projects-header reveal">
@@ -872,61 +903,79 @@ function handleSubmit(){
     <div class="projects-grid" id="projectsGrid"></div>
   </div>
 </section>
- 
+
 <div class="section-divider"></div>
- 
+
 <section id="contact">
   <div class="section-inner">
     <div class="reveal" style="text-align:center;margin-bottom:64px;">
       <div class="section-eyebrow">Contact</div>
       <h2 class="section-title" style="max-width:600px;margin:0 auto 16px;">Let's Build<br><span class="light">Something Together</span></h2>
-      <p class="section-desc" style="margin:0 auto;text-align:center;">Open to roles in finance, BI, and data analytics. Based in Lagos - available for remote and on-site engagements.</p>
+      <p class="section-desc" style="margin:0 auto;text-align:center;">Open to roles in finance, BI, and data analytics. Based in Lagos and available for remote and on-site engagements.</p>
     </div>
     <div class="contact-wrap">
       <div class="contact-info reveal">
         <div class="contact-info-item" id="ciEmail">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">&#9993;</div>
           <div><div class="cii-label">Email</div><div class="cii-value"><a href="#">-</a></div></div>
         </div>
         <div class="contact-info-item" id="ciPhone">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">&#9742;</div>
           <div><div class="cii-label">Phone</div><div class="cii-value"><a href="#">-</a></div></div>
         </div>
         <div class="contact-info-item">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">&#9679;</div>
           <div><div class="cii-label">Location</div><div class="cii-value">Lagos, Nigeria</div></div>
         </div>
         <div class="contact-info-item" id="ciLinkedin">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">in</div>
           <div><div class="cii-label">LinkedIn</div><div class="cii-value"><a href="#" target="_blank">adeyemo-jamiu-210605251</a></div></div>
         </div>
         <div class="contact-info-item">
-          <div class="cii-icon">●</div>
+          <div class="cii-icon">&#9679;</div>
           <div><div class="cii-label">Current Role</div><div class="cii-value">Finance Officer - GTI Capital Limited</div></div>
         </div>
       </div>
       <div class="contact-form reveal reveal-d2">
         <div class="form-title">Send a Message</div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="John" /></div>
-          <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Doe" /></div>
-        </div>
-        <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="john@company.com" /></div>
-        <div class="form-group"><label class="form-label">Subject</label><input type="text" class="form-input" placeholder="Project / Opportunity / Collaboration" /></div>
-        <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me about your project or opportunity..."></textarea></div>
-        <button class="form-submit" id="submitBtn" onclick="handleSubmit()">Send Message →</button>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" name="firstName" class="form-input" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" name="lastName" class="form-input" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-input" placeholder="john@company.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <input type="text" name="subject" class="form-input" placeholder="Project / Opportunity / Collaboration" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea name="message" class="form-textarea" placeholder="Tell me about your project or opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Send Message</button>
+          <p class="form-notice" id="formNotice"></p>
+        </form>
       </div>
     </div>
   </div>
 </section>
- 
+
 <footer>
   <div class="footer-brand">Jamiu<span>.</span></div>
-  <div class="footer-copy">© 2026 Adeyemo Jamiu Adewale · All Rights Reserved</div>
+  <div class="footer-copy">&#169; 2026 Adeyemo Jamiu Adewale · All Rights Reserved</div>
   <div class="footer-links">
     <a id="footerEmail"    href="#">Email</a>
     <a id="footerLinkedin" href="#" target="_blank">LinkedIn</a>
-    <a href="#home">Back to Top ↑</a>
+    <a href="#home">Back to Top</a>
   </div>
 </footer>
 </body>
