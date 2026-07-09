@@ -15,6 +15,7 @@
   --blue: #0071E3; --blue-hover: #0077ED; --blue-pale: rgba(0,113,227,0.08);
   --glass-bg: rgba(255,255,255,0.72); --glass-border: rgba(255,255,255,0.45);
   --glass-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  --panel-invert: #000000;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   --radius: 18px; --radius-lg: 28px; --radius-xl: 40px;
   --ease: cubic-bezier(0.4,0,0.2,1);
@@ -54,7 +55,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:ce
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
 .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--black);border-radius:2px;transition:all 0.3s}
 .mobile-drawer{position:fixed;top:52px;left:0;right:0;z-index:999;
-  background:rgba(255,255,255,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  background:var(--white);background:color-mix(in srgb, var(--white) 97%, transparent);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
   padding:24px 32px;border-bottom:0.5px solid var(--gray-mid);
   transform:translateY(-10px);opacity:0;pointer-events:none;transition:all 0.25s var(--ease);
   display:flex;flex-direction:column}
@@ -240,7 +242,7 @@ section{padding:120px 48px}
 
 /* RESUME */
 #resume{background:var(--white)}
-.resume-card{background:var(--black-deep);border-radius:var(--radius-xl);padding:64px 56px;
+.resume-card{background:var(--panel-invert);border-radius:var(--radius-xl);padding:64px 56px;
   display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden}
 .resume-card::before{content:'';position:absolute;top:-30%;right:-10%;width:60%;height:160%;
   background:radial-gradient(circle,rgba(0,113,227,0.18) 0%,transparent 70%);pointer-events:none}
@@ -306,13 +308,58 @@ section{padding:120px 48px}
 .whatsapp-float:hover{transform:scale(1.08);box-shadow:0 10px 30px rgba(37,211,102,0.5)}
 .whatsapp-float svg{width:30px;height:30px}
 .whatsapp-tooltip{position:absolute;right:70px;top:50%;transform:translateY(-50%);
-  background:var(--black-deep);color:#fff;font-size:0.78rem;font-weight:500;padding:8px 14px;
+  background:var(--panel-invert);color:#fff;font-size:0.78rem;font-weight:500;padding:8px 14px;
   border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s}
 .whatsapp-float:hover .whatsapp-tooltip{opacity:1}
 @media(max-width:600px){.whatsapp-float{bottom:20px;right:20px;width:52px;height:52px}.whatsapp-float svg{width:26px;height:26px}.whatsapp-tooltip{display:none}}
 
+/* PLAY / MINI GAME */
+#play{background:var(--gray-soft)}
+.play-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:56px;flex-wrap:wrap}
+.game-shell{background:var(--glass-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:0.5px solid var(--glass-border);border-radius:var(--radius-xl);box-shadow:var(--glass-shadow);
+  padding:44px;position:relative;overflow:hidden}
+.game-shell::before{content:'';position:absolute;top:-30%;right:-15%;width:50%;height:120%;
+  background:radial-gradient(circle,rgba(0,113,227,0.07) 0%,transparent 70%);pointer-events:none}
+.game-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;
+  flex-wrap:wrap;position:relative;z-index:1}
+.game-stats{display:flex;gap:28px;flex-wrap:wrap}
+.game-stat{display:flex;flex-direction:column;gap:2px}
+.game-stat-label{font-size:0.68rem;color:var(--gray-darker);text-transform:uppercase;letter-spacing:0.06em}
+.game-stat-val{font-size:1.1rem;font-weight:700;color:var(--black-deep);letter-spacing:-0.02em}
+.game-stat-val.accent{color:var(--blue)}
+.game-newbtn{background:var(--gray-soft);border:0.5px solid var(--gray-mid);border-radius:980px;
+  padding:9px 20px;font-size:0.8rem;font-weight:600;color:var(--black);transition:all 0.2s}
+.game-newbtn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative;z-index:1;
+  max-width:520px;margin:0 auto}
+.match-card{aspect-ratio:1;perspective:800px;cursor:pointer}
+.match-card-inner{position:relative;width:100%;height:100%;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d}
+.match-card.flipped .match-card-inner,.match-card.matched .match-card-inner{transform:rotateY(180deg)}
+.match-card-face{position:absolute;inset:0;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  backface-visibility:hidden}
+.match-card-back{background:linear-gradient(135deg,var(--blue) 0%,#30B0C7 100%);box-shadow:0 4px 14px rgba(0,113,227,0.25)}
+.match-card-back::after{content:'';width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,0.6)}
+.match-card-front{background:var(--white);border:1.5px solid var(--gray-mid);transform:rotateY(180deg)}
+.match-card-front svg{width:34px;height:34px}
+.match-card.matched .match-card-front{border-color:var(--blue);background:var(--blue-pale)}
+.match-card.matched{cursor:default}
+.game-win-overlay{position:absolute;inset:0;background:rgba(255,255,255,0.85);backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity 0.35s var(--ease);z-index:2;border-radius:var(--radius-xl)}
+@media(prefers-color-scheme:dark){.game-win-overlay{background:rgba(28,28,30,0.9)}}
+.game-win-overlay.show{opacity:1;pointer-events:all}
+.game-win-card{text-align:center;padding:16px}
+.game-win-title{font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;color:var(--black-deep);margin-bottom:10px}
+.game-win-sub{font-size:0.9rem;color:var(--gray-darker);margin-bottom:24px}
+.game-win-sub strong{color:var(--blue)}
+.game-again-btn{background:var(--blue);color:#fff;font-size:0.88rem;font-weight:600;padding:13px 30px;
+  border-radius:980px;transition:background 0.2s,transform 0.2s;box-shadow:0 4px 16px rgba(0,113,227,0.3)}
+.game-again-btn:hover{background:var(--blue-hover);transform:scale(1.02)}
+
 /* HIGHLIGHTS BAND */
-.highlights-band{background:var(--black-deep);padding:80px 48px}
+.highlights-band{background:var(--panel-invert);padding:80px 48px}
 .highlights-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
 .hl-item{padding:40px 32px;border-right:0.5px solid rgba(255,255,255,0.08);text-align:center}
 .hl-item:last-child{border-right:none}
@@ -355,7 +402,7 @@ section{padding:120px 48px}
 .form-notice{font-size:0.78rem;color:var(--gray-darker);text-align:center;margin-top:10px;min-height:20px}
 
 /* FOOTER */
-footer{background:var(--black-deep);padding:48px;display:flex;align-items:center;
+footer{background:var(--panel-invert);padding:48px;display:flex;align-items:center;
   justify-content:space-between;flex-wrap:wrap;gap:20px}
 .footer-brand{font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:-0.02em}
 .footer-brand span{color:var(--blue)}
@@ -394,6 +441,10 @@ footer{background:var(--black-deep);padding:48px;display:flex;align-items:center
   .resume-right{align-items:center}
   .blog-grid{grid-template-columns:1fr}
   .blog-modal{padding:36px 24px 40px}
+  .game-shell{padding:28px 20px}
+  .card-grid{gap:8px}
+  .match-card-front svg{width:26px;height:26px}
+  .game-stats{gap:18px}
 }
 @media(max-width:600px){
   .highlights-inner{grid-template-columns:1fr}
@@ -418,7 +469,7 @@ const PROFILE = {
   phone:    "+234 706 082 1273",
   linkedin: "https://www.linkedin.com/in/adeyemo-jamiu-adewale-210605251?lipi=urn%3Ali%3Apage%3Ad_flagship3_messaging_conversation_detail%3BF%2FfcR9k1RTG1wNzSq9%2FDRw%3D%3D",
   whatsapp: "2347060821273",
-  resumeFile: `${GITHUB}//images/Adeyemo_Jamiu_Adewale_CV.pdf`,
+  resumeFile: `${GITHUB}/files/Adeyemo_Jamiu_Adewale_CV.pdf`,
   pills: ["Accountant", "BI Analyst", "Data Strategist", "ACA (In View)"],
   bio: [
     `Data tells stories, but most organizations only see the numbers. My work sits at the intersection of <strong>business intelligence, 
@@ -694,6 +745,19 @@ const BLOG_POSTS = [
   },
 ];
 
+const GAME_ICONS = [
+  '<rect x="4" y="10" width="3" height="10"/><rect x="10.5" y="5" width="3" height="15"/><rect x="17" y="13" width="3" height="7"/>',
+  '<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 1 0 8 8h-8Z" fill="var(--blue)" stroke="none"/>',
+  '<path d="M4 16 L9 10 L13 13 L20 5"/><path d="M15 5 H20 V10"/>',
+  '<rect x="5" y="3" width="14" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><circle cx="8" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="16" cy="12" r="1"/><circle cx="8" cy="16" r="1"/><circle cx="12" cy="16" r="1"/><circle cx="16" cy="16" r="1"/>',
+  '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5 V19 A8 3 0 0 0 20 19 V5"/><path d="M4 12 A8 3 0 0 0 20 12"/>',
+  '<circle cx="12" cy="12" r="9"/><path d="M9 15.3c0 1.5 1.3 2.4 3 2.4s3 -0.9 3 -2.2c0 -2.9 -6 -1.6 -6 -4.5 0 -1.3 1.3 -2.2 3 -2.2s3 0.9 3 2.2"/><line x1="12" y1="6" x2="12" y2="18"/>',
+  '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>',
+  '<circle cx="10" cy="10" r="6"/><line x1="15" y1="15" x2="20" y2="20"/>',
+];
+
+const GAME = { deck: [], flippedIdx: [], matchedCount: 0, moves: 0, seconds: 0, timer: null, locked: false, started: false };
+
 const HIGHLIGHTS = [
   { num: "N800", suffix: "M",    label: "Cashflow tracked" },
   { num: "N41",  suffix: "T",    label: "FAAC fund disbursement analysed" },
@@ -823,6 +887,125 @@ function closeBlogPost(){
   document.body.style.overflow = '';
 }
 
+/* DATA MATCH MINI GAME */
+function shuffleArr(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function formatGameTime(s){
+  const m = Math.floor(s/60).toString().padStart(2,'0');
+  const sec = (s%60).toString().padStart(2,'0');
+  return `${m}:${sec}`;
+}
+
+function getBestTime(){
+  try { return localStorage.getItem('dataMatchBest'); } catch(e){ return null; }
+}
+
+function setBestTime(s){
+  try { localStorage.setItem('dataMatchBest', s); } catch(e){ /* storage unavailable */ }
+}
+
+function renderGameStats(){
+  document.getElementById('gameMoves').textContent = GAME.moves;
+  document.getElementById('gameTime').textContent  = formatGameTime(GAME.seconds);
+  const best = getBestTime();
+  document.getElementById('gameBest').textContent  = best ? formatGameTime(Number(best)) : '--:--';
+}
+
+function renderGameGrid(){
+  const grid = document.getElementById('gameGrid');
+  grid.innerHTML = GAME.deck.map((iconIdx,i)=>{
+    const isFlipped = GAME.flippedIdx.includes(i);
+    const isMatched = GAME.matchedState[i];
+    const cls = ['match-card', isFlipped?'flipped':'', isMatched?'matched':''].join(' ').trim();
+    return `
+      <div class="${cls}" onclick="flipCard(${i})">
+        <div class="match-card-inner">
+          <div class="match-card-face match-card-back"></div>
+          <div class="match-card-face match-card-front">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${GAME_ICONS[iconIdx]}</svg>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function initGame(){
+  clearInterval(GAME.timer);
+  const pairs = shuffleArr([...Array(8).keys()]);
+  GAME.deck = shuffleArr([...pairs, ...pairs]);
+  GAME.flippedIdx = [];
+  GAME.matchedState = new Array(16).fill(false);
+  GAME.matchedCount = 0;
+  GAME.moves = 0;
+  GAME.seconds = 0;
+  GAME.locked = false;
+  GAME.started = false;
+  document.getElementById('gameWinOverlay').classList.remove('show');
+  renderGameGrid();
+  renderGameStats();
+}
+
+function startGameTimer(){
+  if(GAME.started) return;
+  GAME.started = true;
+  GAME.timer = setInterval(()=>{
+    GAME.seconds += 1;
+    document.getElementById('gameTime').textContent = formatGameTime(GAME.seconds);
+  }, 1000);
+}
+
+function flipCard(i){
+  if(GAME.locked) return;
+  if(GAME.matchedState[i]) return;
+  if(GAME.flippedIdx.includes(i)) return;
+  if(GAME.flippedIdx.length === 2) return;
+
+  startGameTimer();
+  GAME.flippedIdx.push(i);
+  renderGameGrid();
+
+  if(GAME.flippedIdx.length === 2){
+    GAME.moves += 1;
+    renderGameStats();
+    GAME.locked = true;
+    const [a,b] = GAME.flippedIdx;
+    if(GAME.deck[a] === GAME.deck[b]){
+      GAME.matchedState[a] = true;
+      GAME.matchedState[b] = true;
+      GAME.matchedCount += 1;
+      GAME.flippedIdx = [];
+      GAME.locked = false;
+      renderGameGrid();
+      if(GAME.matchedCount === 8) winGame();
+    } else {
+      setTimeout(()=>{
+        GAME.flippedIdx = [];
+        GAME.locked = false;
+        renderGameGrid();
+      }, 750);
+    }
+  }
+}
+
+function winGame(){
+  clearInterval(GAME.timer);
+  const best = getBestTime();
+  const isNewBest = !best || GAME.seconds < Number(best);
+  if(isNewBest) setBestTime(GAME.seconds);
+  document.getElementById('gameWinSub').innerHTML =
+    `Cleared in <strong>${GAME.moves}</strong> moves and <strong>${formatGameTime(GAME.seconds)}</strong>` +
+    (isNewBest ? ', that is a new best time.' : '.');
+  document.getElementById('gameWinOverlay').classList.add('show');
+  renderGameStats();
+}
+
 function renderHighlights(){
   return HIGHLIGHTS.map(h=>`
     <div class="hl-item">
@@ -866,6 +1049,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('resumePages').textContent   = RESUME.pages;
   document.getElementById('resumeFormat').textContent  = RESUME.format;
   document.getElementById('whatsappFloat').href = `https://wa.me/${PROFILE.whatsapp}?text=${encodeURIComponent("Hi Jamiu, I found your portfolio and would like to connect.")}`;
+  initGame();
 
   const revealObs = new IntersectionObserver(entries=>{
     entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible') });
@@ -975,6 +1159,7 @@ async function handleSubmit(e) {
     <li><a href="#projects">Projects</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="#resume">Resume</a></li>
+    <li><a href="#play">Play</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="mailto:adeyemojamiu30@gmail.com" class="nav-cta">Hire Me</a>
@@ -990,6 +1175,7 @@ async function handleSubmit(e) {
   <a href="#projects"   onclick="toggleDrawer()">Projects</a>
   <a href="#blog"       onclick="toggleDrawer()">Blog</a>
   <a href="#resume"     onclick="toggleDrawer()">Resume</a>
+  <a href="#play"       onclick="toggleDrawer()">Play</a>
   <a href="#contact"    onclick="toggleDrawer()">Contact</a>
   <a href="mailto:adeyemojamiu30@gmail.com" style="color:var(--blue);font-weight:600;">Hire Me</a>
 </div>
@@ -1149,6 +1335,47 @@ async function handleSubmit(e) {
     <div class="blog-modal-body" id="blogModalBody"></div>
   </div>
 </div>
+
+<div class="section-divider"></div>
+
+<section id="play">
+  <div class="section-inner">
+    <div class="play-header reveal">
+      <div>
+        <div class="section-eyebrow">Take a Break</div>
+        <h2 class="section-title">Data<br><span class="light">Match</span></h2>
+      </div>
+      <p class="section-desc">Flip the cards and pair up the analytics icons. See how few moves and how little time you need to clear the board.</p>
+    </div>
+    <div class="game-shell reveal reveal-d1">
+      <div class="game-topbar">
+        <div class="game-stats">
+          <div class="game-stat">
+            <span class="game-stat-label">Moves</span>
+            <span class="game-stat-val" id="gameMoves">0</span>
+          </div>
+          <div class="game-stat">
+            <span class="game-stat-label">Time</span>
+            <span class="game-stat-val accent" id="gameTime">00:00</span>
+          </div>
+          <div class="game-stat">
+            <span class="game-stat-label">Best time</span>
+            <span class="game-stat-val" id="gameBest">--:--</span>
+          </div>
+        </div>
+        <button class="game-newbtn" onclick="initGame()">New Game</button>
+      </div>
+      <div class="card-grid" id="gameGrid"></div>
+      <div class="game-win-overlay" id="gameWinOverlay">
+        <div class="game-win-card">
+          <div class="game-win-title">Board cleared</div>
+          <p class="game-win-sub" id="gameWinSub"></p>
+          <button class="game-again-btn" onclick="initGame()">Play Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="section-divider"></div>
 
